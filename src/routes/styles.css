@@ -1,0 +1,48 @@
+:root {
+	--text: #111;
+	--bg: #fff;
+	--text-2: #444;
+	--text-bg: #b5b5b5;
+	--desktop-width: 1096px;
+}
+
+.app {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	margin: 0 auto;
+	padding-top: 16px;
+	/* add this only to mobile! */
+	/* padding: 16px; */
+	max-width: var(--desktop-width);
+	/* background: #f00; */
+}
+
+* {
+	font-family: 'Inter', sans-serif;
+	color: var(--text-color);
+	box-sizing: border-box;
+}
+
+body {
+	background: var(--background-color);
+	margin: 0;
+	padding: 0;
+}
+
+/* don't change! */
+main {
+	padding: 0 !important;
+	margin: 0 !important;
+	flex-grow: 1;
+	overflow-y: auto;
+  display: flex;
+	justify-content: center; /* Center horizontally */
+	align-items: center; /* Center vertically */
+}
+
+html {
+	padding: 0 !important;
+	margin: 0;
+	scroll-behavior: smooth;
+}
