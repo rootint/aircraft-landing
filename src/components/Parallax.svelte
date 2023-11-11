@@ -11,7 +11,6 @@
 		var scene = document.getElementById('scene');
 		var parallaxInstance = new Parallax(scene);
 	});
-
 </script>
 
 <ul id="scene">
@@ -100,7 +99,6 @@
 	</p>
 </div>
 
-
 <style>
 	.circle-circle {
 		animation: rotate 4s linear infinite;
@@ -172,5 +170,14 @@
 		padding: 0;
 		margin: 0;
 		z-index: -5;
+        animation: fadeIn 0.5s ease;
+	}
+	@keyframes fadeIn {
+		from {
+			opacity: 0.5;
+		}
+		to {
+			opacity: 1;
+		}
 	}
 </style>

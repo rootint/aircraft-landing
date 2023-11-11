@@ -4,7 +4,6 @@
 	function validateText() {}
 
 	function handleSubmit() {}
-
 </script>
 
 <section class="centered">
@@ -44,6 +43,7 @@
         margin: 0 auto; 
         padding: 4px 12px; */
 		margin-bottom: 24px;
+		animation: slideUp 0.5s ease;
 	}
 	@media (max-width: 800px) {
 		.loved-container {
@@ -176,8 +176,8 @@
 	@media (max-width: 800px) {
 		button {
 			width: 100%;
-            font-size: 1rem;
-            padding: 1rem 4rem;
+			font-size: 1rem;
+			padding: 1rem 4rem;
 		}
 	}
 
@@ -195,13 +195,14 @@
 		border: none;
 		border: 1px solid #aaa;
 		box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+		opacity: 1;
 	}
 	@media (max-width: 800px) {
 		.email-input {
 			width: 100%;
-            font-size: 1rem;
-            padding: 16px;
-            height: unset;
+			font-size: 1rem;
+			padding: 16px;
+			height: unset;
 		}
 	}
 
@@ -221,6 +222,7 @@
 	.row {
 		display: flex;
 		justify-content: center;
+        animation: fadeIn 1s ease;
 	}
 	@media (max-width: 800px) {
 		.row {
@@ -253,6 +255,7 @@
 		text-align: center;
 		margin-bottom: 24px;
 		max-width: 48rem;
+		animation: slideUp 0.5s ease;
 	}
 	@media (max-width: 800px) {
 		h1 {
@@ -269,6 +272,7 @@
 		text-align: center;
 		line-height: 140%;
 		margin-bottom: 40px;
+		animation: slideUp 0.5s ease;
 	}
 	@media (max-width: 800px) {
 		h2 {
@@ -285,5 +289,27 @@
 		align-items: center;
 		display: flex;
 		flex-direction: column;
+	}
+	@keyframes slideUp {
+		0% {
+			opacity: 0;
+			transform: translateY(40px);
+		}
+		50% {
+			opacity: 1; /* Opacity reaches 1 more quickly */
+		}
+		100% {
+			transform: translateY(0);
+		}
+	}
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+            scale: 0.95;
+		}
+		to {
+			opacity: 1;
+            scale: 1;
+		}
 	}
 </style>

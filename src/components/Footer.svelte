@@ -92,7 +92,7 @@
 			padding: 0;
 			margin: 0;
 			margin-top: 16px;
-            margin-bottom: 16px;
+			margin-bottom: 16px;
 			z-index: 1;
 			display: flex;
 			justify-content: center;
