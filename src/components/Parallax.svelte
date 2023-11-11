@@ -176,9 +176,11 @@
 	@keyframes fadeIn {
 		from {
 			opacity: 0.5;
+            transform: translateY(20px);
 		}
 		to {
 			opacity: 1;
+            transform: translateY(0px);
 		}
 	}
 </style>
