@@ -1,7 +1,7 @@
 <script>
 	import cross from '$lib/assets/cross.svg';
 	import plus from '$lib/assets/plus.svg';
-    import triangle from '$lib/assets/triangle.svg';
+	import triangle from '$lib/assets/triangle.svg';
 	import plus_cross_cross from '$lib/assets/plus_cross_cross.svg';
 	import circle_circle from '$lib/assets/circle_circle.svg';
 	import circle_dotted from '$lib/assets/circle_dotted.svg';
@@ -17,20 +17,21 @@
 	<li class="layer" data-depth="0.6">
 		<img src={cross} alt="Parallax Cross" style="position: absolute; top: 25%; left: 25%;" />
 		<img src={cross} alt="Parallax Cross" style="position: absolute; bottom: 25%; right: 25%;" />
-        <!-- <img src={cross} alt="Parallax Cross" style="position: absolute; top: 33%; right: 33%;" /> -->
+		<!-- <img src={cross} alt="Parallax Cross" style="position: absolute; top: 33%; right: 33%;" /> -->
 	</li>
 	<li class="layer" data-depth="0.4">
 		<img src={cross} alt="Parallax Cross" style="position: absolute; top: 5%; left: 5%;" />
 		<img src={cross} alt="Parallax Cross" style="position: absolute; bottom: 5%; left: 10%;" />
-		<img src={cross} alt="Parallax Cross" style="position: absolute; top: 10%; right: 10%;" />
+		<img src={cross} alt="Parallax Cross" style="position: absolute; top: 50%; right: 10%;" />
 		<img src={cross} alt="Parallax Cross" style="position: absolute; bottom: 10%; right: 5%;" />
 	</li>
 	<li class="layer" data-depth="0.15">
 		<img src={cross} alt="Parallax Cross" style="position: absolute; top: 7%; left: 20%;" />
 		<img src={cross} alt="Parallax Cross" style="position: absolute; top: 7%; right: 20%;" />
 	</li>
-    <li class="layer" data-depth="0.2">
-		<img src={triangle} alt="Parallax Triangle" style="position: absolute; right: 10%; top: 40%;" />
+	<li class="layer" data-depth="0.2">
+		<img src={cross} alt="Parallax Cross" style="position: absolute; bottom: 15%; right: 60%;" />
+		<!-- <img src={triangle} alt="Parallax Triangle" style="position: absolute; right: 10%; top: 40%;" /> -->
 	</li>
 	<li class="layer" data-depth="0.1">
 		<img
@@ -40,7 +41,7 @@
 		/>
 		<img
 			src={circle_dotted}
-			style="position: absolute; left: 160px; bottom: 15%"
+			style="position: absolute; left: 100px; bottom: 15%"
 			alt="Circle Dotted"
 		/>
 		<img
@@ -91,6 +92,7 @@
 	.circle-circle {
 		animation: rotate 4s linear infinite;
 	}
+
 	@keyframes rotate {
 		0% {
 			transform: rotate(-60deg);
@@ -98,6 +100,10 @@
 		100% {
 			transform: rotate(180deg);
 		}
+	}
+
+	svg {
+		animation: rotation 5s linear infinite;
 	}
 	.line {
 		position: absolute;
