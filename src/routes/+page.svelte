@@ -11,6 +11,7 @@
 		href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Roboto+Mono&display=swap"
 		rel="stylesheet"
 	/>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
 </svelte:head>
 
 <Hero />

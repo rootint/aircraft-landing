@@ -141,7 +141,7 @@
 		font-weight: 400;
 		font-style: normal;
 		font-size: 1.25rem;
-		background-color: var(--background-color);
+        background-color: #fff;
 		color: #111;
 		padding: 16px;
 		border-radius: 8px;
@@ -172,6 +172,7 @@
 		font-size: 20px;
 		text-align: center;
 		margin: 0 0;
+        color: #111;
 		margin-bottom: 24px;
 	}
 	h1 {
