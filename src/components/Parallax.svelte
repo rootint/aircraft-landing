@@ -106,16 +106,11 @@
 <div class="decoration-container">
 	<!-- <div class="line" /> -->
 	<p class="monospace-background" style="top: 0; left: 30%;">1 2 3 4 5 6 7 8 9 0</p>
-	<p
-		class="monospace-background"
-		style="bottom: 12px; transform: translateX(50%); right: 50%; color: #999;"
-	>
-		Questions? tioluwani@llime.co
-	</p>
 	<p class="monospace-background" style="top: 50%; right: 8px;">
 		A<br />B<br />C<br />D<br />E<br />F<br />
 	</p>
 </div>
+
 
 <style>
 	.circle-circle {

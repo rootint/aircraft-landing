@@ -5,11 +5,6 @@
 
 	function handleSubmit() {}
 
-	let textArea;
-	function adjustHeight() {
-		textArea.style.height = 'auto'; // Temporarily reset the height to get the scroll height
-		textArea.style.height = `${textArea.scrollHeight}px`;
-	}
 </script>
 
 <section class="centered">
@@ -23,8 +18,7 @@
 	</h2>
 	<div class="row">
 		<input
-			bind:this={textArea}
-			on:input={adjustHeight}
+			on:input={handleSubmit}
 			type="email"
 			bind:value={email}
 			class="email-input"

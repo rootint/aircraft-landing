@@ -7,6 +7,19 @@
 	let emailFocus;
 	let buttonText = 'Join Newsletter';
 
+	function handleKeydown(event) {
+		// Check if the Enter key was pressed
+		if (event.key === 'Enter' || event.keyCode === 13) {
+			// Prevent the default action to avoid submitting a form if it exists
+			event.preventDefault();
+
+			// Call the handleSubmit function if the email is valid
+			if (isEmailValid) {
+				handleSubmit();
+			}
+		}
+	}
+
 	const handleSubmit = async () => {
 		try {
 			buttonText = 'Loading...';
@@ -100,8 +113,9 @@
 				bind:this={emailFocus}
 				bind:value={email}
 				on:input={validateEmail}
+                on:keydown={handleKeydown}
 				placeholder="Enter your email"
-				style="width: {inputExpanded ? '250px' : '0'}; visibility: {inputExpanded
+				style="width: {inputExpanded ? '200px' : '0'}; visibility: {inputExpanded
 					? 'visible'
 					: 'hidden'}; margin-right: {inputExpanded ? '16px' : '-32px'};"
 			/>
@@ -185,8 +199,8 @@
 			background-color: #222;
 			font-weight: 500;
 			font-size: 0.75rem;
-            width: unset;
-            min-width: 140px;
+			width: unset;
+			min-width: 140px;
 			border: none;
 			text-decoration: none;
 			color: #fff;
