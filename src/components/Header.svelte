@@ -66,13 +66,13 @@
 	function expandInput() {
 		inputExpanded = !inputExpanded;
 		buttonText = 'Join Newsletter';
-		if (inputExpanded) {
-			// emailFocus.blur();
-			// emailFocus.focus();
-		} else {
-			setTimeout(() => emailFocus.focus(), 0);
-			// emailFocus.focus();
-		}
+		// if (inputExpanded) {
+		// 	// emailFocus.blur();
+		// 	// emailFocus.focus();
+		// } else {
+		// 	setTimeout(() => emailFocus.focus(), 0);
+		// 	// emailFocus.focus();
+		// }
 		// if (inputExpanded) {
 		//     buttonText = 'Subscribe!';
 		// } else {
