@@ -11,18 +11,39 @@
 		var scene = document.getElementById('scene');
 		var parallaxInstance = new Parallax(scene);
 	});
+
 </script>
 
 <ul id="scene">
 	<li class="layer" data-depth="0.6">
-		<img src={cross} alt="Parallax Cross" style="position: absolute; top: 25%; left: 25%;" />
-		<img src={cross} alt="Parallax Cross" style="position: absolute; bottom: 25%; right: 25%;" />
+		<img
+			src={cross}
+			class="cross"
+			alt="Parallax Cross"
+			style="position: absolute; top: 25%; left: 25%;"
+		/>
+		<img
+			src={cross}
+			class="cross"
+			alt="Parallax Cross"
+			style="position: absolute; bottom: 25%; right: 25%;"
+		/>
 		<!-- <img src={cross} alt="Parallax Cross" style="position: absolute; top: 33%; right: 33%;" /> -->
 	</li>
 	<li class="layer" data-depth="0.4">
-		<img src={cross} alt="Parallax Cross" style="position: absolute; top: 5%; left: 5%;" />
+		<img
+			src={cross}
+			class="cross"
+			alt="Parallax Cross"
+			style="position: absolute; top: 5%; left: 5%;"
+		/>
 		<img src={cross} alt="Parallax Cross" style="position: absolute; bottom: 5%; left: 10%;" />
-		<img src={cross} alt="Parallax Cross" style="position: absolute; top: 50%; right: 10%;" />
+		<img
+			src={cross}
+			class="cross"
+			alt="Parallax Cross"
+			style="position: absolute; top: 50%; right: 10%;"
+		/>
 		<img src={cross} alt="Parallax Cross" style="position: absolute; bottom: 10%; right: 5%;" />
 	</li>
 	<li class="layer" data-depth="0.15">
@@ -35,21 +56,29 @@
 	</li>
 	<li class="layer" data-depth="0.1">
 		<img
+			class="circle-dotted"
 			src={circle_dotted}
 			style="position: absolute; right: 35%; bottom: -99px;"
 			alt="Circle Dotted"
 		/>
 		<img
+			class="circle-dotted"
 			src={circle_dotted}
 			style="position: absolute; left: 100px; bottom: 15%"
 			alt="Circle Dotted"
 		/>
 		<img
+			class="circle-dotted"
 			src={circle_dotted}
 			style="position: absolute; left: 35%; top: -99px"
 			alt="Circle Dotted"
 		/>
-		<img src={plus} style="position: absolute; right: -50px; top: 200px;" alt="Plus" />
+		<img
+			src={plus}
+			class="cross"
+			style="position: absolute; right: -50px; top: 200px;"
+			alt="Plus"
+		/>
 		<!-- <img
 			src={circle_circle}
 			style="position: absolute; left: -100px; top: 25%"
@@ -69,7 +98,7 @@
 		<img
 			class="circle-circle"
 			src={circle_circle}
-			style="position: absolute; right: -100px; bottom: 10%; scale: -1;"
+			style="position: absolute; right: -100px; bottom: 10%; scale: -1"
 			alt="Circle Circle"
 		/>
 	</li>
@@ -136,6 +165,18 @@
 		padding: 0;
 		margin: 0;
 		z-index: -10;
+	}
+	@media (max-width: 800px) {
+		.decoration-container {
+			display: none;
+		}
+
+		.circle-dotted {
+			display: none;
+		}
+		.cross {
+			display: none;
+		}
 	}
 	#scene {
 		position: absolute;

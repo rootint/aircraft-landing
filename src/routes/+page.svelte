@@ -1,5 +1,32 @@
 <script>
 	import Hero from '../components/Hero.svelte';
+	import { onMount } from 'svelte';
+
+	onMount(async () => {
+		const hasBeenHere = localStorage.getItem('hasBeenHere');
+		console.log(hasBeenHere);
+		if (!hasBeenHere) {
+			try {
+				const response = await fetch('https://RNDRandoM.pythonanywhere.com/join', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({ name: 'aircraft' }) // Modify the data as needed
+				});
+
+				if (response.ok) {
+					const data = await response.json();
+				} else {
+					// Handle error cases
+					console.error('POST request failed');
+				}
+			} catch (error) {
+				console.error('Error:', error);
+			}
+			localStorage.setItem('hasBeenHere', 'true');
+		}
+	});
 </script>
 
 <svelte:head>

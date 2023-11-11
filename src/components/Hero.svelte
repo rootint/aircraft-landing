@@ -4,25 +4,34 @@
 	function validateText() {}
 
 	function handleSubmit() {}
+
+	let textArea;
+	function adjustHeight() {
+		textArea.style.height = 'auto'; // Temporarily reset the height to get the scroll height
+		textArea.style.height = `${textArea.scrollHeight}px`;
+	}
 </script>
 
 <section class="centered">
-	<p>Loved by 100+ customers</p>
-	<h1>Easiest landing page<br /> builder ever</h1>
+	<div class="loved-container">
+		<p>Loved by 100+ customers</p>
+	</div>
+	<h1>Easiest landing page builder ever</h1>
 	<h2>
 		Create and share your landing page in 3 minutes.<br /> Boost visitor conversion and win more customers
 		using AI.
 	</h2>
 	<div class="row">
 		<input
+			bind:this={textArea}
+			on:input={adjustHeight}
 			type="email"
 			bind:value={email}
-			on:input={validateText}
 			class="email-input"
 			placeholder="A startup that creates tailored AI models"
 		/>
 		<div style="width: 32px" />
-		<div style="button-column">
+		<div class="button-column">
 			<div class="gradient-wrapper">
 				<div class="another-wrapper">
 					<button on:click={handleSubmit}>Build Now</button>
@@ -34,6 +43,25 @@
 </section>
 
 <style>
+	.loved-container {
+		/* display: inline-block;
+		border-radius: 8px;
+		border: solid #999 1px;
+        margin: 0 auto; 
+        padding: 4px 12px; */
+		margin-bottom: 24px;
+	}
+	@media (max-width: 800px) {
+		.loved-container {
+			/* display: inline-block;
+		border-radius: 8px;
+		border: solid #999 1px;
+        margin: 0 auto; 
+        padding: 4px 12px; */
+			margin-bottom: 16px;
+			margin-top: 16px;
+		}
+	}
 	p.monospace {
 		font-family: 'Roboto Mono', monospace;
 		font-size: 16px;
@@ -59,6 +87,23 @@
 		);
 		background-size: 200% 200%;
 		border-radius: 12px;
+	}
+
+	@media (max-width: 800px) {
+		.gradient-wrapper {
+			margin-top: 16px;
+			width: 100%;
+		}
+	}
+
+	@media (max-width: 800px) {
+		.button-column {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
 	}
 
 	.gradient-wrapper:hover {
@@ -134,6 +179,14 @@
 		cursor: pointer;
 	}
 
+	@media (max-width: 800px) {
+		button {
+			width: 100%;
+            font-size: 1rem;
+            padding: 1rem 4rem;
+		}
+	}
+
 	.email-input {
 		margin-top: 6px;
 		width: 30rem;
@@ -141,13 +194,21 @@
 		font-weight: 400;
 		font-style: normal;
 		font-size: 1.25rem;
-        background-color: #fff;
+		background-color: #fff;
 		color: #111;
 		padding: 16px;
 		border-radius: 8px;
 		border: none;
 		border: 1px solid #aaa;
-        box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+		box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+	}
+	@media (max-width: 800px) {
+		.email-input {
+			width: 100%;
+            font-size: 1rem;
+            padding: 16px;
+            height: unset;
+		}
 	}
 
 	.email-input:focus {
@@ -167,13 +228,29 @@
 		display: flex;
 		justify-content: center;
 	}
+	@media (max-width: 800px) {
+		.row {
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+		}
+	}
 	p {
 		font-weight: 500;
 		font-size: 20px;
 		text-align: center;
 		margin: 0 0;
-        color: #111;
-		margin-bottom: 24px;
+		color: #111;
+	}
+	@media (max-width: 800px) {
+		p {
+			font-weight: 500;
+			font-size: 16px;
+			text-align: center;
+			margin: 0 0;
+			color: #111;
+		}
 	}
 	h1 {
 		margin: 0 0;
@@ -181,6 +258,14 @@
 		font-size: 72px;
 		text-align: center;
 		margin-bottom: 24px;
+		max-width: 48rem;
+	}
+	@media (max-width: 800px) {
+		h1 {
+			font-size: 48px;
+			font-weight: 600;
+			max-width: none;
+		}
 	}
 	h2 {
 		margin: 0 0;
@@ -191,9 +276,20 @@
 		line-height: 140%;
 		margin-bottom: 40px;
 	}
+	@media (max-width: 800px) {
+		h2 {
+			color: #777;
+			font-size: 20px;
+			font-style: normal;
+			font-weight: 400;
+			margin-bottom: 24px;
+		}
+	}
 	section.centered {
 		/* background-color: aqua; */
 		justify-content: center;
 		align-items: center;
+		display: flex;
+		flex-direction: column;
 	}
 </style>

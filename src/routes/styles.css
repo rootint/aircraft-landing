@@ -3,7 +3,7 @@
 	--bg: #fff;
 	--text-2: #444;
 	--text-bg: #b5b5b5;
-	--desktop-width: 1096px;
+	--desktop-width: 1080px;
 }
 
 .app {
@@ -13,9 +13,21 @@
 	margin: 0 auto;
 	padding-top: 16px;
 	/* add this only to mobile! */
-	/* padding: 16px; */
+	padding: 16px 16px;
 	max-width: var(--desktop-width);
 	/* background: #f00; */
+}
+
+@media (max-width: 800px) and (max-height: 800px) {
+	.app {
+		height: unset;
+	}
+}
+
+@media (max-height: 700px) {
+	.app {
+		height: unset;
+	}
 }
 
 * {
@@ -36,7 +48,7 @@ main {
 	margin: 0 !important;
 	flex-grow: 1;
 	overflow-y: auto;
-  display: flex;
+	display: flex;
 	justify-content: center; /* Center horizontally */
 	align-items: center; /* Center vertically */
 }
