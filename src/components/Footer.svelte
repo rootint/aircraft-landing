@@ -31,7 +31,7 @@
 	</div>
 	<div style="display: flex;">
 		<p>Built using</p>
-		<img src={aircraft} width="20" alt="Aircraft Logo" style="margin-left: 12px;" />
+		<img src={aircraft} width="20" height="19" alt="Aircraft Logo" style="margin-left: 12px;" />
 	</div>
 </footer>
 
@@ -70,10 +70,10 @@
 		cursor: pointer;
 	}
 
-    @media (max-width: 800px) {
+	@media (max-width: 800px) {
 		.email-container {
 			display: none;
-            width: 0;
+			width: 0;
 		}
 	}
 
@@ -91,7 +91,8 @@
 			overflow: hidden;
 			padding: 0;
 			margin: 0;
-            margin-top: 16px;
+			margin-top: 16px;
+            margin-bottom: 16px;
 			z-index: 1;
 			display: flex;
 			justify-content: center;
@@ -102,7 +103,7 @@
 	p.monospace-background {
 		font-family: 'Roboto Mono', monospace;
 		margin: 0;
-		color: #aaa;
+		color: #999;
 		font-size: 16px;
 		padding: 0;
 	}

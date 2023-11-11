@@ -83,7 +83,7 @@
 <header>
 	<nav>
 		<div class="top-row-logo" style="width: {inputExpanded ? '0' : '96px'};">
-			<img src={aircraft} width="20" alt="Aircraft Logo" />
+			<img src={aircraft} width="20" height="19" alt="Aircraft Logo" />
 			<p class="logo">Aircraft</p>
 		</div>
 		<div
@@ -94,17 +94,19 @@
 				<a href="#demo">View Demo</a>
 				<a class="pricing" href="#pricing"
 					>Pricing
-					<svg
-						class="arrow"
-						xmlns="http://www.w3.org/2000/svg"
-						width="9"
-						height="111"
-						fill="#B5B5B5"
-						><path
-							d="M4.854.646a.5.5 0 0 0-.708 0L.964 3.828a.5.5 0 1 0 .708.708L4.5 1.707l2.828 2.829a.5.5 0 1 0 .708-.708L4.854.646ZM5 111V1H4v110h1Z"
-						/></svg
-					>
-					<div class="text">Check our cheap plans to customize your experience.</div>
+					<div class="hide-on-small-screens">
+						<svg
+							class="arrow"
+							xmlns="http://www.w3.org/2000/svg"
+							width="9"
+							height="111"
+							fill="#B5B5B5"
+							><path
+								d="M4.854.646a.5.5 0 0 0-.708 0L.964 3.828a.5.5 0 1 0 .708.708L4.5 1.707l2.828 2.829a.5.5 0 1 0 .708-.708L4.854.646ZM5 111V1H4v110h1Z"
+							/></svg
+						>
+						<div class="text">Check our cheap plans to customize your experience.</div>
+					</div>
 				</a>
 			</div>
 			<input
@@ -113,11 +115,9 @@
 				bind:this={emailFocus}
 				bind:value={email}
 				on:input={validateEmail}
-                on:keydown={handleKeydown}
+				on:keydown={handleKeydown}
 				placeholder="Enter your email"
-				style="width: {inputExpanded ? '200px' : '0'}; visibility: {inputExpanded
-					? 'visible'
-					: 'hidden'}; margin-right: {inputExpanded ? '16px' : '-32px'};"
+				class={inputExpanded ? 'expanded' : 'hidden'}
 			/>
 			<button
 				class="header-button"
@@ -129,6 +129,25 @@
 </header>
 
 <style>
+	.hidden {
+		visibility: hidden;
+		margin-right: -32px;
+		width: 0px;
+	}
+	/* When inputExpanded is true */
+	.expanded {
+		visibility: visible;
+		margin-right: 16px;
+		width: 200px; /* Default width for mobile */
+	}
+
+	/* Media query for desktop */
+	@media (max-width: 800px) {
+		/* Adjust 768px based on your mobile/desktop breakpoint */
+		.expanded {
+			width: 180px; /* Width for desktop */
+		}
+	}
 	.hide-on-mobile {
 		display: flex;
 		align-items: center;
@@ -158,6 +177,12 @@
 			padding: 12px;
 			box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
 			transition: width 0.5s, visibility 0.5s, margin-right 0.5s;
+		}
+	}
+
+	@media (max-height: 800px) {
+		.hide-on-small-screens {
+			display: none;
 		}
 	}
 

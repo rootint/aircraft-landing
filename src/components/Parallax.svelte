@@ -52,7 +52,6 @@
 	</li>
 	<li class="layer" data-depth="0.2">
 		<img src={cross} alt="Parallax Cross" style="position: absolute; bottom: 15%; right: 60%;" />
-		<!-- <img src={triangle} alt="Parallax Triangle" style="position: absolute; right: 10%; top: 40%;" /> -->
 	</li>
 	<li class="layer" data-depth="0.1">
 		<img
@@ -76,19 +75,9 @@
 		<img
 			src={plus}
 			class="cross"
-			style="position: absolute; right: -50px; top: 200px;"
+			style="position: absolute; right: -20px; top: 200px;"
 			alt="Plus"
 		/>
-		<!-- <img
-			src={circle_circle}
-			style="position: absolute; left: -100px; top: 25%"
-			alt="Circle Circle"
-		/> -->
-		<!-- <img
-			src={circle_circle}
-			style="position: absolute; right: -100px; bottom: 10%; scale: -1;"
-			alt="Circle Circle"
-		/> -->
 		<img
 			class="circle-circle"
 			src={circle_circle}
