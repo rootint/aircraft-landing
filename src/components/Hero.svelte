@@ -43,7 +43,7 @@
         margin: 0 auto; 
         padding: 4px 12px; */
 		margin-bottom: 24px;
-		animation: slideUp 0.5s ease;
+		animation: slideUp 0.7s ease;
 	}
 	@media (max-width: 800px) {
 		.loved-container {
@@ -255,7 +255,7 @@
 		text-align: center;
 		margin-bottom: 24px;
 		max-width: 48rem;
-		animation: slideUp 0.5s ease;
+		animation: slideUp 0.7s ease;
 	}
 	@media (max-width: 800px) {
 		h1 {
@@ -272,7 +272,7 @@
 		text-align: center;
 		line-height: 140%;
 		margin-bottom: 40px;
-		animation: slideUp 0.5s ease;
+		animation: slideUp 0.7s ease;
 	}
 	@media (max-width: 800px) {
 		h2 {
@@ -293,9 +293,9 @@
 	@keyframes slideUp {
 		0% {
 			opacity: 0;
-			transform: translateY(40px);
+			transform: translateY(70px);
 		}
-		50% {
+		80% {
 			opacity: 1; /* Opacity reaches 1 more quickly */
 		}
 		100% {
