@@ -34,7 +34,7 @@
 		position: absolute;
 		top: 88px;
 		left: 34px;
-		font-family: 'Roboto Mono';
+		font-family: 'Roboto Mono', monospace;
 		color: #b5b5b5;
 		font-size: 12px;
 		width: 150px;

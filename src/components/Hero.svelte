@@ -35,7 +35,7 @@
 
 <style>
 	p.monospace {
-		font-family: 'Roboto Mono';
+		font-family: 'Roboto Mono', monospace;
 		font-size: 16px;
 		color: #888;
 		margin-top: 8px;
