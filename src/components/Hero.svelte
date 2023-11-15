@@ -8,7 +8,7 @@
 
 <section class="centered">
 	<div class="loved-container">
-		<p>Loved by 100+ customers</p>
+		<p>Loved by 1000+ customers</p>
 	</div>
 	<h1>Easiest landing page builder ever</h1>
 	<h2>
