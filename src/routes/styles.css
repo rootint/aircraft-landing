@@ -58,3 +58,26 @@ html {
 	margin: 0;
 	scroll-behavior: smooth;
 }
+
+@keyframes slideUp {
+	0% {
+		opacity: 0;
+		transform: translateY(70px);
+	}
+	80% {
+		opacity: 1; /* Opacity reaches 1 more quickly */
+	}
+	100% {
+		transform: translateY(0);
+	}
+}
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		scale: 0.95;
+	}
+	to {
+		opacity: 1;
+		scale: 1;
+	}
+}

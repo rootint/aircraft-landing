@@ -23,15 +23,15 @@
 	</p>
 </div>
 <footer>
-	<p>2023, Aircraft</p>
+	<p>2024, Aircraft</p>
 	<div class="email-container">
 		<p class="monospace-background" on:click={copyEmail}>
 			{emailCopied ? 'Email Copied!' : 'Questions? tioluwani@llime.co'}
 		</p>
 	</div>
 	<div style="display: flex;">
-		<p>Built using</p>
-		<img src={aircraft} width="20" height="19" alt="Aircraft Logo" style="margin-left: 12px;" />
+		<p>Built by LLime</p>
+		<!-- <img src={aircraft} width="20" height="19" alt="Aircraft Logo" style="margin-left: 12px;" /> -->
 	</div>
 </footer>
 

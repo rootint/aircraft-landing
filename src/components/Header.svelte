@@ -84,9 +84,12 @@
 	<nav>
 		<div class="top-row-logo" style="width: {inputExpanded ? '0' : '96px'};">
 			<img src={aircraft} width="20" height="19" alt="Aircraft Logo" />
-			<p class="logo">Aircraft</p>
+            <a href="/" class="logo">Aircraft</a>
 		</div>
-		<div
+        <div class="top-row">
+            <a href="#contact">Contact Us</a>
+        </div>
+		<!-- <div
 			class="top-row"
 			style="width: {inputExpanded ? '100%' : 'unset'}; display: flex; justify-content: end;"
 		>
@@ -124,7 +127,7 @@
 				on:click={inputExpanded ? (isEmailValid ? handleSubmit : expandInput) : expandInput}
 				>{buttonText}</button
 			>
-		</div>
+		</div> -->
 	</nav>
 </header>
 
@@ -244,6 +247,10 @@
 		position: relative;
 	}
 
+    a:last-child {
+        margin-right: 0;
+    }
+
 	a:hover {
 		color: #777;
 	}
@@ -253,10 +260,10 @@
 		justify-content: space-between;
 		align-items: center;
 		margin: 0 0;
-		padding-top: 0px;
+		padding-top: 8px;
 	}
 
-	p.logo {
+	.logo {
 		margin-left: 12px;
 		font-weight: 500;
 	}

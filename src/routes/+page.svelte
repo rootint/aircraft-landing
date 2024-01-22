@@ -31,7 +31,7 @@
 
 <svelte:head>
 	<title>Aircraft</title>
-	<meta name="description" content="Build landing pages in no time using AI" />
+	<meta name="description" content="Validate how suitable you are for an idea in seconds." />
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	<link

@@ -8,26 +8,27 @@
 
 <section class="centered">
 	<div class="loved-container">
-		<p>Loved by 1000+ customers</p>
+		<p>Loved by 500+ customers</p>
 	</div>
-	<h1>Easiest landing page builder ever</h1>
+	<h1>#1 Idea Validation Tool for Solopreneurs</h1>
 	<h2>
-		Create and share your landing page in 3 minutes.<br /> Boost visitor conversion and win more customers
-		using AI.
+		Turn Your 'Maybe' into 'Definitely' with Aircraft:<br /> Idea Validation Tailored to You.
 	</h2>
 	<div class="row">
-		<input
+		<!-- <input
 			on:input={handleSubmit}
 			type="email"
 			bind:value={email}
 			class="email-input"
 			placeholder="A startup that creates tailored AI models"
 		/>
-		<div style="width: 32px" />
+		<div style="width: 32px" /> -->
 		<div class="button-column">
 			<div class="gradient-wrapper">
 				<div class="another-wrapper">
-					<button on:click={handleSubmit}>Build Now</button>
+					<a href="/onboarding/description">
+						<button on:click={handleSubmit}>Check Now</button>
+					</a>
 				</div>
 			</div>
 			<p class="monospace">It’s free. No login or<br />credit card required.</p>
@@ -162,7 +163,7 @@
 	}
 
 	button {
-		padding: 1.25rem 4rem;
+		padding: 1.25rem 6rem;
 		background: var(--text);
 		font-weight: 500;
 		font-size: 1.25rem;
@@ -222,7 +223,7 @@
 	.row {
 		display: flex;
 		justify-content: center;
-        animation: fadeIn 1s ease;
+		animation: fadeIn 1s ease;
 	}
 	@media (max-width: 800px) {
 		.row {
@@ -289,27 +290,5 @@
 		align-items: center;
 		display: flex;
 		flex-direction: column;
-	}
-	@keyframes slideUp {
-		0% {
-			opacity: 0;
-			transform: translateY(70px);
-		}
-		80% {
-			opacity: 1; /* Opacity reaches 1 more quickly */
-		}
-		100% {
-			transform: translateY(0);
-		}
-	}
-	@keyframes fadeIn {
-		from {
-			opacity: 0;
-            scale: 0.95;
-		}
-		to {
-			opacity: 1;
-            scale: 1;
-		}
 	}
 </style>
