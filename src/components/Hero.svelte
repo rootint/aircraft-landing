@@ -4,6 +4,10 @@
 	function validateText() {}
 
 	function handleSubmit() {}
+
+  function handleContactUs() {
+      console.log('Pressed Contact us');
+  }
 </script>
 
 <section class="centered">
@@ -31,6 +35,9 @@
 					</a>
 				</div>
 			</div>
+			<a href="/onboarding/email" class="contact-us-wrapper">
+				<button on:click={handleContactUs} class="contact-us-button">Contact Us</button>
+			</a>
 			<p class="monospace">It’s free. No login or<br />credit card required.</p>
 		</div>
 	</div>
@@ -180,6 +187,32 @@
 			font-size: 1rem;
 			padding: 1rem 4rem;
 		}
+	}
+
+	.contact-us-button {
+	    background: #fff;
+	    color: #000;
+	    padding: 1.25rem 3rem; /* Adjust as per the Check Now button */
+	    margin-left: 20px;
+	    border: none;
+	    border-radius: 8px;
+	    font-size: 1rem; /* Maintain consistency with Check Now button */
+	    font-weight: 500;
+	    cursor: pointer;
+	}
+
+	@media (max-width: 800px) {
+	    .contact-us-button {
+	        padding: 1rem 2rem; /* Adjust for mobile responsiveness */
+	        width: auto; /* Ensure button size adapts on smaller screens */
+	        margin-left: 0; /* Remove margin between buttons on smaller screens */
+	        margin-top: 16px; /* Stack buttons vertically */
+	    }
+	    .contact-us-wrapper {
+	        width: 100%; /* Full width on smaller screens */
+	        display: flex; /* Use flex layout */
+	        justify-content: center; /* Center the button */
+	    }
 	}
 
 	.email-input {
