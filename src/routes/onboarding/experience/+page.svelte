@@ -1,12 +1,13 @@
 <script>
-	let description = '';
+	let experience = '';
 	let isButtonEnabled = false;
 
 	function handleSubmit() {
-		console.log(`Sent ${description}`);
+		console.log(`Sent ${experience}`);
+        localStorage.setItem('experience', experience);
 	}
 	function checkButton() {
-		isButtonEnabled = description.length != 0;
+		isButtonEnabled = experience.length != 0;
 	}
 </script>
 
@@ -25,7 +26,7 @@
 <section class="centered">
 	<h3>We want to know more about your experience and what you do.</h3>
 	<textarea
-		bind:value={description}
+		bind:value={experience}
         on:input={checkButton}
 		class="benefit-input"
 		placeholder="I'm an AI developer specializing in NLP, passionate about using my skills to create educational tools that adapt to individual learning styles and simplify complex academic concepts."

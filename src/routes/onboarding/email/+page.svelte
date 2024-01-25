@@ -1,10 +1,38 @@
 <script>
+	import { goto } from '$app/navigation';
+
 	let email = '';
 	let submitted = false;
+	$: isEmailValid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email);
 
-	function handleSubmit() {
+	async function handleSubmit() {
 		console.log(`Submitting ${email}`);
 		submitted = true;
+		const endpoint = 'http://localhost:1337/send-receive-message';
+
+		const response = await fetch(endpoint, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				description: localStorage.getItem('description'),
+				experience: localStorage.getItem('experience')
+			})
+		});
+		if (!response.ok) {
+			throw new Error(`Error: ${response.status}`);
+		}
+
+		const data = await response.json();
+		console.log(data);
+		localStorage.setItem('result', data['message']);
+		if (data['message'].includes('PERFECT')) {
+			goto('/onboarding/perfect');
+		} else {
+			goto('/onboarding/success');
+		}
+		// return data['message'];
 	}
 </script>
 
@@ -25,17 +53,17 @@
 	<input type="email" bind:value={email} class="email-input" placeholder="example@email.com" />
 
 	{#if submitted}
-        <p>Thank you! Your answer will be available soon.</p>
-    {:else}
-		<button on:click={handleSubmit} disabled={email.trim() === ''}>Submit</button>
+		<p>Thank you! Your answer is loading.</p>
+	{:else}
+		<button on:click={handleSubmit} disabled={!isEmailValid}>Submit</button>
 	{/if}
 </section>
 
 <style>
-    p {
-        font-size: 14px;
-        font-weight: 400;
-    }
+	p {
+		font-size: 14px;
+		font-weight: 400;
+	}
 	h3 {
 		font-size: 16px;
 		font-weight: 500;
@@ -81,7 +109,7 @@
 		align-items: center;
 		display: flex;
 		flex-direction: column;
-        animation: fadeIn 0.7s ease;
+		animation: fadeIn 0.7s ease;
 	}
 	button {
 		display: flex;

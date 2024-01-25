@@ -4,6 +4,7 @@
 
 	function handleSubmit() {
 		console.log(`Sent ${description}`);
+        localStorage.setItem('description', description);
 	}
 
 	function checkButton() {
