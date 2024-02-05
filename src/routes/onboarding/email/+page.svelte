@@ -26,8 +26,8 @@
 
 		const data = await response.json();
 		console.log(data);
-		localStorage.setItem('result', data['message']);
-		if (data['message'].includes('PERFECT')) {
+		localStorage.setItem('result', data);
+		if (data['summary'].includes('PERFECT')) {
 			goto('/onboarding/perfect');
 		} else {
 			goto('/onboarding/success');
@@ -65,9 +65,19 @@
 		font-weight: 400;
 	}
 	h3 {
+		font-size: 20px;
+		font-weight: 600;
+		margin: 0px;
+		margin-bottom: 24px;
+	}
+
+	h4 {
 		font-size: 16px;
 		font-weight: 500;
-		margin-bottom: 24px;
+		color: #777;
+		margin: 0;
+		margin-bottom: 16px;
+		line-height: 140%;
 	}
 	.email-input {
 		margin-top: 6px;

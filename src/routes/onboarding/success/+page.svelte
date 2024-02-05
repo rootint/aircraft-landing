@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import SvelteMarkdown from 'svelte-markdown';
 
 	let result = '';
 
@@ -22,16 +23,49 @@
 
 <section class="centered">
 	<h3>Great Job! You’ve made it this far.</h3>
-	<h3>
+	<h4>
 		Below are the things you need to build this product and <br /> the team you need behind you.
-	</h3>
-	<p>
-		{result}
-	</p>
+	</h4>
+	<div class="gradient-wrapper">
+		<div class="result-container">
+			<SvelteMarkdown source={result} />
+		</div>
+	</div>
 </section>
 
 <style>
+	.gradient-wrapper {
+		padding: 2px 2px;
+		background: linear-gradient(
+			to bottom right,
+			#91de45,
+			#45dea7,
+			#454ade,
+			#8347de,
+			#de4545,
+			#91de45,
+			#45dea7,
+			#454ade,
+			#8347de,
+			#de4545
+		);
+		background-size: 200% 200%;
+		border-radius: 10px;
+		margin-top: 16px;
+		box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+	}
+	.result-container {
+		background-color: #fff;
+		padding: 16px 32px;
+		border-radius: 8px;
+	}
 	h3 {
+		font-size: 20px;
+		font-weight: 500;
+		margin-bottom: 12px;
+		text-align: center;
+	}
+	h4 {
 		font-size: 16px;
 		font-weight: 500;
 		margin-bottom: 12px;
@@ -44,5 +78,6 @@
 		display: flex;
 		flex-direction: column;
 		animation: fadeIn 0.7s ease;
+		max-width: 700px;
 	}
 </style>

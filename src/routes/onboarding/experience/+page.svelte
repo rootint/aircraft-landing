@@ -1,13 +1,55 @@
 <script>
+	import { fade } from 'svelte/transition';
+	import { Linkedin, ChevronRight } from 'svelte-lucide';
+	import { ChevronLeft } from 'svelte-lucide';
+
 	let experience = '';
 	let isButtonEnabled = false;
+	let isLinkedInEnabled = false;
+	let username = '';
+	let visible = true;
+	let isError = false;
+	let isLoading = false;
+	let result = null;
 
 	function handleSubmit() {
 		console.log(`Sent ${experience}`);
-        localStorage.setItem('experience', experience);
+		if (experience != '') {
+			localStorage.setItem('experience', experience);
+		}
+	}
+	async function getLinkedIn() {
+		isError = false;
+		isLoading = true;
+		const endpoint = 'http://localhost:1337/parse-linkedin';
+
+		const response = await fetch(endpoint, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				username: username
+			})
+		});
+		if (!response.ok) {
+			// throw new Error(`Error: ${response.status}`);
+			isError = true;
+			isLoading = false;
+			isLinkedInEnabled = false;
+			return;
+		}
+
+		result = await response.json();
+		console.log(result);
+		localStorage.setItem('experience', JSON.stringify(result));
+		// return data['message'];
+		visible = false;
+		isButtonEnabled = true;
 	}
 	function checkButton() {
 		isButtonEnabled = experience.length != 0;
+		isLinkedInEnabled = username.length != 0;
 	}
 </script>
 
@@ -24,32 +66,144 @@
 </svelte:head>
 
 <section class="centered">
-	<h3>We want to know more about your experience and what you do.</h3>
-	<textarea
-		bind:value={experience}
-        on:input={checkButton}
-		class="benefit-input"
-		placeholder="I'm an AI developer specializing in NLP, passionate about using my skills to create educational tools that adapt to individual learning styles and simplify complex academic concepts."
-	/>
-	<a href="/onboarding/email" on:click={handleSubmit} class={isButtonEnabled ? 'enabled' : ''}
-		>Next</a
-	>
+	<h3>Step 2. Experience</h3>
+	<h4>
+		Seamlessly personalize your experience by importing your work and education history from
+		LinkedIn, or share it with us manually.
+	</h4>
+
+	{#if visible}
+		<div class="email-row">
+			<div class="email-container">
+				<Linkedin size="48" color="#AAAAAA" />
+				<span>https://linkedin.com/in/</span>
+				<input
+					bind:value={username}
+					on:input={checkButton}
+					class="email-input"
+					placeholder="username"
+				/>
+			</div>
+
+			<div style="width: 16px" />
+			<button
+				on:click={getLinkedIn}
+				class={isLoading ? 'loading' : isLinkedInEnabled ? 'enabled' : ''}><ChevronRight /></button
+			>
+		</div>
+	{/if}
+	{#if isError}
+		<p style="color: red; margin: 0; margin-bottom: 16px;">Your username is incorrect.</p>
+	{/if}
+	{#if !visible}
+		<div class="description">
+			<p style="font-size: 14px;">
+				Summary: {result['summary']}
+			</p>
+		</div>
+	{/if}
+	<!-- <div style="display: flex">
+		<a href="/onboarding/description" on:click={handleSubmit} class="enabled"><ChevronLeft /></a>
+		<div style="width: 16px" />
+		
+	</div> -->
+	{#if visible}
+		<a href="/onboarding/email" on:click={handleSubmit} class="enabled"
+			>I don't have a LinkedIn account</a
+		>
+	{:else}
+		<a href="/onboarding/email" on:click={handleSubmit} class="enabled"
+			>Continue</a
+		>
+	{/if}
 </section>
 
 <style>
-	.enabled {
+	.description {
+		margin-top: 16px;
+		margin-bottom: 16px;
+		max-width: 500px;
+		padding: 8px 16px;
+		border-radius: 8px;
+		border: 1px solid #ddd;
+	}
+	.loading {
+		pointer-events: none;
+	}
+	.removable {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.email-row {
+		display: flex;
+		width: 100%;
+		margin-bottom: 24px;
+	}
+	span {
+		font-weight: 400;
+		font-style: normal;
+		font-size: 1rem;
+		color: #555;
+		margin-left: 12px;
+	}
+	.email-container {
+		/* width: 20rem;z */
+		background-color: #fff;
+		color: #111;
+		padding: 0px 16px;
+		border-radius: 8px;
+		border: none;
+		border: 1px solid #ddd;
+		/* box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25); */
+		opacity: 1;
+		display: flex;
+		align-items: center;
+	}
+	@media (max-width: 800px) {
+		.email-container {
+			width: 100%;
+			font-size: 1rem;
+			padding: 16px;
+			height: unset;
+		}
+	}
+
+	.email-container:focus {
+		outline: none;
+		border: 1px solid #111;
+	}
+
+	.email-input {
+		border: none;
+		outline: none;
+		width: 100%;
+		font-weight: 500;
+		font-style: normal;
+		font-size: 1rem;
+		padding: none;
+	}
+
+	button.enabled {
 		background-color: #111;
-		box-shadow: 0 0 2px #111;
+		box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+		pointer-events: all;
+		cursor: pointer;
+	}
+
+	a.enabled {
+		background-color: #fff;
+		box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+		border: 1px solid #ddd;
 		pointer-events: all;
 		cursor: pointer;
 	}
 	a {
-		display: flex;
-		align-items: center;
-		color: #fff;
+		text-align: center;
+		color: #111;
 		font-size: 16px;
 		font-weight: 500;
-		background-color: #ddd;
+		background-color: #fff;
 		border: none;
 		border-radius: 8px;
 		cursor: pointer;
@@ -59,10 +213,36 @@
 		cursor: default;
 	}
 
-	h3 {
+	button {
+		display: flex;
+		align-items: center;
+		color: #fff;
 		font-size: 16px;
 		font-weight: 500;
+		background-color: #ddd;
+		border: none;
+		border-radius: 8px;
+		cursor: pointer;
+		padding: 16px 16px;
+		text-decoration: none;
+		pointer-events: none;
+		cursor: default;
+	}
+
+	h3 {
+		font-size: 20px;
+		font-weight: 600;
+		margin: 0px;
 		margin-bottom: 24px;
+	}
+
+	h4 {
+		font-size: 16px;
+		font-weight: 500;
+		color: #777;
+		margin: 0;
+		margin-bottom: 16px;
+		line-height: 140%;
 	}
 	.benefit-input {
 		width: 500px;
@@ -94,9 +274,14 @@
 	section.centered {
 		/* background-color: aqua; */
 		justify-content: center;
-		align-items: center;
 		display: flex;
 		flex-direction: column;
-        animation: fadeIn 0.7s ease;
+		animation: fadeIn 0.7s ease;
+		background-color: #fff;
+		padding: 32px;
+		border: 1px solid #ddd;
+		box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+		border-radius: 8px;
+		max-width: 520px;
 	}
 </style>
