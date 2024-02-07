@@ -1,13 +1,13 @@
 <script>
 	import { fade } from 'svelte/transition';
-	import { Linkedin, ChevronRight } from 'svelte-lucide';
-	import { ChevronLeft } from 'svelte-lucide';
+	import { Linkedin, ChevronRight } from 'lucide-svelte';
 
 	let experience = '';
 	let isButtonEnabled = false;
 	let isLinkedInEnabled = false;
 	let username = '';
 	let visible = true;
+	let noLinkedin = false;
 	let isError = false;
 	let isLoading = false;
 	let result = null;
@@ -47,6 +47,11 @@
 		visible = false;
 		isButtonEnabled = true;
 	}
+
+	function changeMode() {
+		noLinkedin = !noLinkedin;
+	}
+
 	function checkButton() {
 		isButtonEnabled = experience.length != 0;
 		isLinkedInEnabled = username.length != 0;
@@ -72,35 +77,45 @@
 		LinkedIn, or share it with us manually.
 	</h4>
 
-	{#if visible}
-		<div class="email-row">
-			<div class="email-container">
-				<Linkedin size="48" color="#AAAAAA" />
-				<span>https://linkedin.com/in/</span>
-				<input
-					bind:value={username}
-					on:input={checkButton}
-					class="email-input"
-					placeholder="username"
-				/>
-			</div>
+	{#if !noLinkedin}
+		{#if visible}
+			<div class="email-row">
+				<div class="email-container">
+					<Linkedin size="48" color="#AAAAAA" />
+					<span>https://linkedin.com/in/</span>
+					<input
+						bind:value={username}
+						on:input={checkButton}
+						class="email-input"
+						placeholder="username"
+					/>
+				</div>
 
-			<div style="width: 16px" />
-			<button
-				on:click={getLinkedIn}
-				class={isLoading ? 'loading' : isLinkedInEnabled ? 'enabled' : ''}><ChevronRight /></button
-			>
-		</div>
-	{/if}
-	{#if isError}
-		<p style="color: red; margin: 0; margin-bottom: 16px;">Your username is incorrect.</p>
-	{/if}
-	{#if !visible}
-		<div class="description">
-			<p style="font-size: 14px;">
-				Summary: {result['summary']}
-			</p>
-		</div>
+				<div style="width: 16px" />
+				<button
+					on:click={getLinkedIn}
+					class={isLoading ? 'loading' : isLinkedInEnabled ? 'enabled' : ''}
+					><ChevronRight /></button
+				>
+			</div>
+		{/if}
+		{#if isError}
+			<p style="color: red; margin: 0; margin-bottom: 16px;">Your username is incorrect.</p>
+		{/if}
+		{#if !visible}
+			<div class="description">
+				<p style="font-size: 14px;">
+					Summary: {result['summary']}
+				</p>
+			</div>
+		{/if}
+	{:else}
+		<textarea
+			bind:value={experience}
+			on:input={checkButton}
+			class="benefit-input"
+			placeholder="An AI-powered learning assistant leveraging an LLM that offers personalized academic support to students, including homework solutions, study planning, and language learning, adapting to individual needs and learning styles."
+		/>
 	{/if}
 	<!-- <div style="display: flex">
 		<a href="/onboarding/description" on:click={handleSubmit} class="enabled"><ChevronLeft /></a>
@@ -108,13 +123,15 @@
 		
 	</div> -->
 	{#if visible}
-		<a href="/onboarding/email" on:click={handleSubmit} class="enabled"
-			>I don't have a LinkedIn account</a
-		>
+		{#if isButtonEnabled}
+			<a href="/onboarding/why" on:click={handleSubmit} class="enabled">Continue</a>
+		{:else}
+			<button on:click={changeMode} class="enabled-big"
+				>I {!noLinkedin ? "don't" : ''} have a LinkedIn account</button
+			>
+		{/if}
 	{:else}
-		<a href="/onboarding/email" on:click={handleSubmit} class="enabled"
-			>Continue</a
-		>
+		<a href="/onboarding/why" on:click={handleSubmit} class="enabled">Continue</a>
 	{/if}
 </section>
 
@@ -191,6 +208,16 @@
 		cursor: pointer;
 	}
 
+	button.enabled-big {
+		color: #111;
+		background-color: #fff;
+		box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+		pointer-events: all;
+		cursor: pointer;
+		border: 1px solid #ddd;
+		display: block;
+	}
+
 	a.enabled {
 		background-color: #fff;
 		box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
@@ -245,21 +272,21 @@
 		line-height: 140%;
 	}
 	.benefit-input {
-		width: 500px;
-		max-lines: 3;
+		max-width: 520px;
+		max-lines: 5;
 		font-weight: 400;
 		font-style: normal;
-		font-size: 16px;
+		font-size: 14px;
 		background-color: #fff;
 		color: #111;
-		padding: 12px;
+		padding: 16px;
 		border-radius: 8px;
 		border: 1px solid #ddd;
-		box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+		/* box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25); */
 		opacity: 1;
 		resize: none;
 		/* height: calc(16px * 3 + 24px); */
-		height: 100px;
+		height: 150px;
 		overflow-y: auto;
 		margin-bottom: 24px;
 	}

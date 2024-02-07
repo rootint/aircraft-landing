@@ -17,7 +17,10 @@
 			},
 			body: JSON.stringify({
 				description: localStorage.getItem('description'),
-				experience: localStorage.getItem('experience')
+				experience: localStorage.getItem('experience'),
+                why: localStorage.getItem('why'),
+                idea: localStorage.getItem('idea'),
+                acute: localStorage.getItem('acute')
 			})
 		});
 		if (!response.ok) {
@@ -27,11 +30,7 @@
 		const data = await response.json();
 		console.log(data);
 		localStorage.setItem('result', data);
-		if (data['summary'].includes('PERFECT')) {
-			goto('/onboarding/perfect');
-		} else {
-			goto('/onboarding/success');
-		}
+		await goto('/results/compatibility/');
 		// return data['message'];
 	}
 </script>
@@ -49,13 +48,14 @@
 </svelte:head>
 
 <section class="centered">
-	<h3>Almost done! Please, enter your email address.</h3>
+	<h3>Last Step. Email Address</h3>
+	<h4>We will send the results to your email. No spam, we promise.</h4>
 	<input type="email" bind:value={email} class="email-input" placeholder="example@email.com" />
 
 	{#if submitted}
 		<p>Thank you! Your answer is loading.</p>
 	{:else}
-		<button on:click={handleSubmit} disabled={!isEmailValid}>Submit</button>
+		<button on:click={handleSubmit} disabled={!isEmailValid}>See Results</button>
 	{/if}
 </section>
 
@@ -81,7 +81,6 @@
 	}
 	.email-input {
 		margin-top: 6px;
-		width: 20rem;
 		font-weight: 400;
 		font-style: normal;
 		font-size: 1rem;
@@ -114,15 +113,18 @@
 		color: #aaa;
 	}
 	section.centered {
-		/* background-color: aqua; */
 		justify-content: center;
-		align-items: center;
 		display: flex;
 		flex-direction: column;
 		animation: fadeIn 0.7s ease;
+		background-color: #fff;
+		padding: 32px;
+		border: 1px solid #ddd;
+		box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+		border-radius: 8px;
+		max-width: 520px;
 	}
 	button {
-		display: flex;
 		align-items: center;
 		color: #fff;
 		font-size: 16px;
