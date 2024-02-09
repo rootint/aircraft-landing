@@ -21,7 +21,7 @@
 	async function getLinkedIn() {
 		isError = false;
 		isLoading = true;
-		const endpoint = 'http://localhost:1337/parse-linkedin';
+		const endpoint = 'https://api.llime.co/aircraft/parse-linkedin';
 
 		const response = await fetch(endpoint, {
 			method: 'POST',

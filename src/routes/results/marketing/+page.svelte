@@ -3,7 +3,7 @@
 
 	// Value to display
 	let marketing = [];
-
+    // TODO: add concrete social media links, like linkedin and facebook or whatever
 	onMount(() => {
 		let result = JSON.parse(localStorage.getItem('result'));
 		marketing = result['marketing'];
@@ -26,19 +26,21 @@
 	<h3>Marketing</h3>
 	<h4>Here are some marketing tips:</h4>
 	{#each marketing as hint}
-		{hint}
+		<div class="description">
+			{hint}
+		</div>
 	{/each}
 	<a href="/results/audience" class="enabled">Next</a>
 </section>
 
 <style>
 	.description {
-		margin-top: 16px;
 		margin-bottom: 16px;
 		max-width: 500px;
 		padding: 8px 16px;
 		border-radius: 8px;
 		border: 1px solid #ddd;
+        font-size: 14px;
 	}
 	.enabled {
 		background-color: #fff;

@@ -8,8 +8,8 @@
 	async function handleSubmit() {
 		console.log(`Submitting ${email}`);
 		submitted = true;
-		const endpoint = 'http://localhost:1337/send-receive-message';
-
+        const endpoint = 'https://api.llime.co/aircraft/send-receive-message';
+        
 		const response = await fetch(endpoint, {
 			method: 'POST',
 			headers: {

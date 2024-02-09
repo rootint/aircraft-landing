@@ -26,14 +26,15 @@
 	<h3>Team</h3>
 	<h4>Here’s the team you need to build the product:</h4>
 	{#each team as teammate}
-		{teammate}
+		<div class="description">
+			{teammate}
+		</div>
 	{/each}
 	<a href="/results/marketing" class="enabled">Next</a>
 </section>
 
 <style>
 	.description {
-		margin-top: 16px;
 		margin-bottom: 16px;
 		max-width: 500px;
 		padding: 8px 16px;

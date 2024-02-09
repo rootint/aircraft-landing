@@ -9,7 +9,7 @@
 		let result = JSON.parse(localStorage.getItem('result'));
 		summary = result['summary'];
 		skills = result['skills'];
-        console.log(skills);
+		console.log(skills);
 	});
 </script>
 
@@ -28,10 +28,19 @@
 <section class="centered">
 	<h3>You are a match!</h3>
 	<h4>Here’s why we think you are suitable for the project:</h4>
-    {#each skills as skill}
-        {skill['name']}
-        {skill['rating']}
-    {/each}
+	{#each skills as skill}
+		<div class="skills-container">
+			<p class="row-title">{skill['name']}</p>
+			<div class="progress-container">
+				<div
+					class="progress-bar {skill['rating'] > 5 ? 'green' : 'orange'}"
+					style="width: {(skill['rating'] / 10) * 100}%;"
+				/>
+			</div>
+			<!-- <p class="row-title">{skill['rating']}</p> -->
+			<!-- <p class="out-of">/10</p> -->
+		</div>
+	{/each}
 	<div class="description">
 		<p style="font-size: 14px; margin: 4px 0px;">
 			{summary}
@@ -41,7 +50,52 @@
 </section>
 
 <style>
-    .description {
+	.skills-container {
+		display: grid;
+		grid-template-columns: minmax(200px, auto) 1fr;
+		gap: 10px;
+		align-items: center;
+	}
+	.green {
+		background-color: #4caf50;
+	}
+
+	.orange {
+		background-color: #ff9800;
+	}
+	.progress-container {
+		width: 100%;
+		background-color: #ddd;
+		border-radius: 8px;
+		margin: 0 16px;
+	}
+
+	.progress-bar {
+		height: 12px;
+		border-radius: 8px;
+		width: 0%;
+		text-align: right;
+		padding-right: 10px;
+		line-height: 12px;
+		color: white;
+		transition: width 0.5s ease-in-out;
+	}
+	.compat-row {
+		display: flex;
+		align-items: center;
+	}
+	.row-title {
+		font-weight: 500;
+		margin: 0;
+		max-height: 1;
+	}
+	.out-of {
+		font-weight: 400;
+		font-size: 12px;
+		margin: 0;
+		color: #999;
+	}
+	.description {
 		margin-top: 16px;
 		margin-bottom: 16px;
 		max-width: 500px;
