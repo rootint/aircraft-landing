@@ -1,10 +1,20 @@
 <script>
+	import { ChevronLeft } from 'lucide-svelte';
+	import { onMount } from 'svelte';
+
 	let description = '';
 	let isButtonEnabled = false;
 
+	onMount(() => {
+		if (localStorage.getItem('description')) {
+			description = localStorage.getItem('description');
+            isButtonEnabled = true;
+		}
+	});
+
 	function handleSubmit() {
 		console.log(`Sent ${description}`);
-        localStorage.setItem('description', description);
+		localStorage.setItem('description', description);
 	}
 
 	function checkButton() {
@@ -26,32 +36,38 @@
 
 <section class="centered">
 	<h3>Step 1. Description</h3>
-    <h4>Describe your project as much as you can. Make sure to include your target audience and key features.</h4>
+	<h4>
+		Describe your project as much as you can. Make sure to include your target audience and key
+		features.
+	</h4>
 	<textarea
 		bind:value={description}
 		on:input={checkButton}
 		class="benefit-input"
 		placeholder="An AI-powered learning assistant leveraging an LLM that offers personalized academic support to students, including homework solutions, study planning, and language learning, adapting to individual needs and learning styles."
 	/>
-	<a href="/onboarding/experience" on:click={handleSubmit} class={isButtonEnabled ? 'enabled' : ''}
-		>Continue</a
+	<a
+		href="/onboarding/experience"
+		on:click={handleSubmit}
+		class={isButtonEnabled ? 'continue enabled' : 'continue'}>Continue</a
 	>
 </section>
 
 <style>
-	.enabled {
+	.continue.enabled {
 		background-color: #111;
-		box-shadow: 0 0 2px #111;
-        pointer-events: all;
-        cursor: pointer;
-        text-align: center;
+		box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+		pointer-events: all;
+		cursor: pointer;
+		text-align: center;
 	}
-	a {
+	.continue {
+		width: 100%;
 		color: #fff;
 		font-size: 16px;
 		font-weight: 600;
 		background-color: #ddd;
-        text-align: center;
+		text-align: center;
 		border: none;
 		border-radius: 8px;
 		cursor: pointer;
@@ -64,18 +80,18 @@
 	h3 {
 		font-size: 20px;
 		font-weight: 600;
-        margin: 0px;
+		margin: 0px;
 		margin-bottom: 24px;
 	}
 
-    h4 {
-        font-size: 16px;
-        font-weight: 500;
-        color: #777;
-        margin: 0;
-        margin-bottom: 16px;
-        line-height: 140%;
-    }
+	h4 {
+		font-size: 16px;
+		font-weight: 500;
+		color: #777;
+		margin: 0;
+		margin-bottom: 16px;
+		line-height: 140%;
+	}
 	.benefit-input {
 		max-width: 520px;
 		max-lines: 5;
@@ -108,12 +124,12 @@
 		justify-content: center;
 		display: flex;
 		flex-direction: column;
-        animation: fadeIn 0.7s ease;
-        background-color: #fff;
-        padding: 32px;
-        border: 1px solid #ddd;
-        box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
-        border-radius: 8px;
-        max-width: 520px;
+		animation: fadeIn 0.7s ease;
+		background-color: #fff;
+		padding: 32px;
+		border: 1px solid #ddd;
+		box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+		border-radius: 8px;
+		max-width: 520px;
 	}
 </style>

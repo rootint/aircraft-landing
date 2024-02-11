@@ -1,16 +1,21 @@
 <script>
 	import { fade } from 'svelte/transition';
-	import { Linkedin, ChevronRight } from 'lucide-svelte';
+	import { Linkedin, ChevronRight, ChevronLeft } from 'lucide-svelte';
 
-	let experience = '';
-	let isButtonEnabled = false;
+	// let visible = false;
+	// let isButtonEnabled = true;
+	// let experience = '';
+	// let result = { summary: 'hi guys this is a summary' };
+
 	let isLinkedInEnabled = false;
 	let username = '';
+	let experience = '';
+	let isButtonEnabled = false;
 	let visible = true;
+	let result = null;
 	let noLinkedin = false;
 	let isError = false;
 	let isLoading = false;
-	let result = null;
 
 	function handleSubmit() {
 		console.log(`Sent ${experience}`);
@@ -33,7 +38,6 @@
 			})
 		});
 		if (!response.ok) {
-			// throw new Error(`Error: ${response.status}`);
 			isError = true;
 			isLoading = false;
 			isLinkedInEnabled = false;
@@ -43,7 +47,6 @@
 		result = await response.json();
 		console.log(result);
 		localStorage.setItem('experience', JSON.stringify(result));
-		// return data['message'];
 		visible = false;
 		isButtonEnabled = true;
 	}
@@ -76,7 +79,6 @@
 		Seamlessly personalize your experience by importing your work and education history from
 		LinkedIn, or share it with us manually.
 	</h4>
-
 	{#if !noLinkedin}
 		{#if visible}
 			<div class="email-row">
@@ -94,18 +96,29 @@
 				<div style="width: 16px" />
 				<button
 					on:click={getLinkedIn}
-					class={isLoading ? 'loading' : isLinkedInEnabled ? 'enabled' : ''}
-					><ChevronRight /></button
+					class={isLinkedInEnabled ? 'linkedin-submit-btn' : 'linkedin-submit-btn disabled'}
 				>
+					{#if isLoading}
+						<div class="lds-ring">
+							<div />
+							<div />
+							<div />
+							<div />
+						</div>
+					{:else}
+						<ChevronRight />
+					{/if}
+				</button>
 			</div>
 		{/if}
 		{#if isError}
 			<p style="color: red; margin: 0; margin-bottom: 16px;">Your username is incorrect.</p>
 		{/if}
 		{#if !visible}
-			<div class="description">
-				<p style="font-size: 14px;">
-					Summary: {result['summary']}
+			<div class="summary">
+				<p style="font-size: 14px; line-height: 140%; color: #555;">
+					<span style="font-weight: 600; font-size: 14px; color: #111; margin: 0; padding: 0;">Summary:</span>
+					{result['summary']}
 				</p>
 			</div>
 		{/if}
@@ -113,45 +126,35 @@
 		<textarea
 			bind:value={experience}
 			on:input={checkButton}
-			class="benefit-input"
+			class="default-input"
 			placeholder="An AI-powered learning assistant leveraging an LLM that offers personalized academic support to students, including homework solutions, study planning, and language learning, adapting to individual needs and learning styles."
 		/>
 	{/if}
-	<!-- <div style="display: flex">
-		<a href="/onboarding/description" on:click={handleSubmit} class="enabled"><ChevronLeft /></a>
-		<div style="width: 16px" />
-		
-	</div> -->
-	{#if visible}
-		{#if isButtonEnabled}
-			<a href="/onboarding/why" on:click={handleSubmit} class="enabled">Continue</a>
+	<div class="button-row">
+		<a href="/onboarding/description" class="back-button"><ChevronLeft color="#111111" /></a>
+
+		{#if visible}
+			{#if isButtonEnabled}
+				<a href="/onboarding/why" on:click={handleSubmit} class="continue">Continue</a>
+			{:else}
+				<button on:click={changeMode} class="linkedin-switch-btn"
+					>I {!noLinkedin ? "don't" : ''} have a LinkedIn account</button
+				>
+			{/if}
 		{:else}
-			<button on:click={changeMode} class="enabled-big"
-				>I {!noLinkedin ? "don't" : ''} have a LinkedIn account</button
-			>
+			<a href="/onboarding/why" on:click={handleSubmit} class="continue">Continue</a>
 		{/if}
-	{:else}
-		<a href="/onboarding/why" on:click={handleSubmit} class="enabled">Continue</a>
-	{/if}
+	</div>
 </section>
 
 <style>
-	.description {
-		margin-top: 16px;
-		margin-bottom: 16px;
-		max-width: 500px;
-		padding: 8px 16px;
+	.summary {
+		margin-bottom: 24px;
+		padding: 4px 16px;
 		border-radius: 8px;
 		border: 1px solid #ddd;
 	}
-	.loading {
-		pointer-events: none;
-	}
-	.removable {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
+
 	.email-row {
 		display: flex;
 		width: 100%;
@@ -165,27 +168,16 @@
 		margin-left: 12px;
 	}
 	.email-container {
-		/* width: 20rem;z */
 		background-color: #fff;
 		color: #111;
 		padding: 0px 16px;
 		border-radius: 8px;
 		border: none;
 		border: 1px solid #ddd;
-		/* box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25); */
 		opacity: 1;
 		display: flex;
 		align-items: center;
 	}
-	@media (max-width: 800px) {
-		.email-container {
-			width: 100%;
-			font-size: 1rem;
-			padding: 16px;
-			height: unset;
-		}
-	}
-
 	.email-container:focus {
 		outline: none;
 		border: 1px solid #111;
@@ -201,14 +193,29 @@
 		padding: none;
 	}
 
-	button.enabled {
+	.linkedin-submit-btn {
+		color: #fff;
 		background-color: #111;
 		box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
 		pointer-events: all;
 		cursor: pointer;
+		border: none;
+		display: block;
+		border-radius: 8px;
+		font-size: 16px;
+		font-weight: 500;
+		padding: 0 12px;
 	}
 
-	button.enabled-big {
+	.linkedin-submit-btn.disabled {
+		box-shadow: none;
+		color: #fff;
+		background-color: #ddd;
+		pointer-events: none;
+		cursor: default;
+	}
+
+	.linkedin-switch-btn {
 		color: #111;
 		background-color: #fff;
 		box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
@@ -216,99 +223,31 @@
 		cursor: pointer;
 		border: 1px solid #ddd;
 		display: block;
-	}
-
-	a.enabled {
-		background-color: #fff;
-		box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
-		border: 1px solid #ddd;
-		pointer-events: all;
-		cursor: pointer;
-	}
-	a {
-		text-align: center;
-		color: #111;
+		border-radius: 8px;
+		width: 100%;
 		font-size: 16px;
 		font-weight: 500;
-		background-color: #fff;
+	}
+	.continue {
+		width: 100%;
+		text-align: center;
+		color: #fff;
+		font-size: 16px;
+		font-weight: 500;
+		background-color: #111;
 		border: none;
 		border-radius: 8px;
 		cursor: pointer;
 		padding: 15px 24px;
 		text-decoration: none;
-		pointer-events: none;
-		cursor: default;
+		box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
 	}
-
-	button {
-		display: flex;
-		align-items: center;
-		color: #fff;
-		font-size: 16px;
-		font-weight: 500;
-		background-color: #ddd;
-		border: none;
-		border-radius: 8px;
-		cursor: pointer;
-		padding: 16px 16px;
-		text-decoration: none;
-		pointer-events: none;
-		cursor: default;
-	}
-
-	h3 {
-		font-size: 20px;
-		font-weight: 600;
-		margin: 0px;
-		margin-bottom: 24px;
-	}
-
-	h4 {
-		font-size: 16px;
-		font-weight: 500;
-		color: #777;
-		margin: 0;
-		margin-bottom: 16px;
-		line-height: 140%;
-	}
-	.benefit-input {
-		max-width: 520px;
-		max-lines: 5;
-		font-weight: 400;
-		font-style: normal;
-		font-size: 14px;
-		background-color: #fff;
-		color: #111;
-		padding: 16px;
-		border-radius: 8px;
-		border: 1px solid #ddd;
-		/* box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25); */
-		opacity: 1;
-		resize: none;
-		/* height: calc(16px * 3 + 24px); */
-		height: 150px;
-		overflow-y: auto;
-		margin-bottom: 24px;
-	}
-
-	.benefit-input:focus {
-		outline: none;
-		border: solid #333 1px;
-	}
-	.benefit-input::placeholder {
-		color: #aaa;
-	}
-	section.centered {
-		/* background-color: aqua; */
-		justify-content: center;
-		display: flex;
-		flex-direction: column;
-		animation: fadeIn 0.7s ease;
-		background-color: #fff;
-		padding: 32px;
-		border: 1px solid #ddd;
-		box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
-		border-radius: 8px;
-		max-width: 520px;
+	@media (max-width: 800px) {
+		.email-container {
+			width: 100%;
+			font-size: 1rem;
+			padding: 16px;
+			height: unset;
+		}
 	}
 </style>

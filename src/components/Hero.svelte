@@ -6,7 +6,7 @@
 	function handleSubmit() {}
 </script>
 
-<section class="centered">
+<section class="center">
 	<div class="loved-container">
 		<p>Loved by 500+ customers</p>
 	</div>
@@ -284,7 +284,7 @@
 			margin-bottom: 24px;
 		}
 	}
-	section.centered {
+	section.center {
 		/* background-color: aqua; */
 		justify-content: center;
 		align-items: center;
