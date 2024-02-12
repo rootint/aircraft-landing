@@ -1,4 +1,5 @@
 <script>
+	import { ChevronLeft, Hammer, PenTool, Wrench } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 
 	// Value to display
@@ -22,75 +23,54 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
 </svelte:head>
 
-<section class="centered">
+<section class="centered" style="width: 580px;">
 	<h3>Team</h3>
 	<h4>Here’s the team you need to build the product:</h4>
-	{#each team as teammate}
-		<div class="description">
+	{#each team as teammate, index}
+		<div class="summary">
+			{#if index == 0}
+				<Wrench size="17" color="#555" style="margin-right: 12px;" />
+			{:else if index == 1}
+				<Hammer size="17" color="#555" style="margin-right: 12px;" />
+			{:else}
+				<PenTool size="17" color="#555" style="margin-right: 12px;" />
+			{/if}
+
 			{teammate}
 		</div>
 	{/each}
-	<a href="/results/marketing" class="enabled">Next</a>
+	<div class="button-row">
+		<a href="/results/general" class="back-button"><ChevronLeft color="#111111" /></a>
+		<a href="/results/marketing" class="continue">Next</a>
+	</div>
 </section>
 
 <style>
-	.description {
-		margin-bottom: 16px;
-		max-width: 500px;
-		padding: 8px 16px;
+	.summary {
+		margin-bottom: 24px;
+		padding: 16px 16px;
 		border-radius: 8px;
 		border: 1px solid #ddd;
+		line-height: 120%;
+		width: 100%;
+		font-weight: 500;
+		display: flex;
+		align-items: center;
 	}
-	.enabled {
-		background-color: #fff;
+	.continue {
+		width: 100%;
 		color: #111;
-		box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
-		pointer-events: all;
-		border: 1px solid #ddd;
-		cursor: pointer;
-		text-align: center;
-	}
-	a {
-		color: #fff;
 		font-size: 16px;
 		font-weight: 600;
-		background-color: #ddd;
 		text-align: center;
-		border: none;
 		border-radius: 8px;
 		cursor: pointer;
 		padding: 15px 24px;
 		text-decoration: none;
-		pointer-events: none;
-		cursor: default;
-	}
-
-	h3 {
-		font-size: 20px;
-		font-weight: 600;
-		margin: 0px;
-		margin-bottom: 24px;
-	}
-
-	h4 {
-		font-size: 16px;
-		font-weight: 500;
-		color: #777;
-		margin: 0;
-		margin-bottom: 16px;
-		line-height: 140%;
-	}
-	section.centered {
-		/* background-color: aqua; */
-		justify-content: center;
-		display: flex;
-		flex-direction: column;
-		animation: fadeIn 0.7s ease;
 		background-color: #fff;
-		padding: 32px;
 		border: 1px solid #ddd;
-		box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
-		border-radius: 8px;
-		max-width: 520px;
+		box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+		pointer-events: all;
+		cursor: pointer;
 	}
 </style>

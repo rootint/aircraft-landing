@@ -1,9 +1,10 @@
 <script>
+	import { ChevronLeft } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 
 	// Value to display
 	let marketing = [];
-    // TODO: add concrete social media links, like linkedin and facebook or whatever
+	// TODO: add concrete social media links, like linkedin and facebook or whatever
 	onMount(() => {
 		let result = JSON.parse(localStorage.getItem('result'));
 		marketing = result['marketing'];
@@ -26,72 +27,39 @@
 	<h3>Marketing</h3>
 	<h4>Here are some marketing tips:</h4>
 	{#each marketing as hint}
-		<div class="description">
+		<div class="summary">
 			{hint}
 		</div>
 	{/each}
-	<a href="/results/audience" class="enabled">Next</a>
+	<div class="button-row" style="margin-top: 8px;">
+		<a href="/results/team" class="back-button"><ChevronLeft color="#111111" /></a>
+		<a href="/results/audience" class="continue">Next</a>
+	</div>
 </section>
 
 <style>
-	.description {
+	.summary {
 		margin-bottom: 16px;
-		max-width: 500px;
-		padding: 8px 16px;
+		padding: 16px 16px;
 		border-radius: 8px;
 		border: 1px solid #ddd;
-        font-size: 14px;
+		line-height: 130%;
+		font-size: 14px;
 	}
-	.enabled {
-		background-color: #fff;
+	.continue {
+		width: 100%;
 		color: #111;
-		box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
-		pointer-events: all;
-		border: 1px solid #ddd;
-		cursor: pointer;
-		text-align: center;
-	}
-	a {
-		color: #fff;
 		font-size: 16px;
 		font-weight: 600;
-		background-color: #ddd;
 		text-align: center;
-		border: none;
 		border-radius: 8px;
 		cursor: pointer;
 		padding: 15px 24px;
 		text-decoration: none;
-		pointer-events: none;
-		cursor: default;
-	}
-
-	h3 {
-		font-size: 20px;
-		font-weight: 600;
-		margin: 0px;
-		margin-bottom: 24px;
-	}
-
-	h4 {
-		font-size: 16px;
-		font-weight: 500;
-		color: #777;
-		margin: 0;
-		margin-bottom: 16px;
-		line-height: 140%;
-	}
-	section.centered {
-		/* background-color: aqua; */
-		justify-content: center;
-		display: flex;
-		flex-direction: column;
-		animation: fadeIn 0.7s ease;
 		background-color: #fff;
-		padding: 32px;
 		border: 1px solid #ddd;
-		box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
-		border-radius: 8px;
-		max-width: 520px;
+		box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+		pointer-events: all;
+		cursor: pointer;
 	}
 </style>

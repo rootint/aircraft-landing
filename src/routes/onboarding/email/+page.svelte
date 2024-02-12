@@ -7,6 +7,7 @@
 	$: isEmailValid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email);
 
 	// TODO: send email to the database
+    // TODO: post until not a 500
 
 	async function handleSubmit() {
 		console.log(`Submitting ${email}`);
@@ -33,6 +34,7 @@
 		const data = await response.json();
 		console.log(data);
 		localStorage.setItem('result', data);
+        localStorage.setItem('email', email);
 		await goto('/results/compatibility/');
 		// return data['message'];
 	}
@@ -66,10 +68,6 @@
 </section>
 
 <style>
-	p {
-		font-size: 14px;
-		font-weight: 400;
-	}
 	.email-input {
 		margin-top: 6px;
 		font-weight: 400;
@@ -81,7 +79,6 @@
 		border-radius: 8px;
 		border: none;
 		border: 1px solid #ddd;
-		box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
 		opacity: 1;
 		margin-bottom: 24px;
 	}

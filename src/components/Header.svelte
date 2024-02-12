@@ -1,11 +1,19 @@
 <script>
 	import aircraft from '$lib/assets/aircraft.svg';
+	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 
 	let inputExpanded = false;
 	let isEmailValid = false;
 	let email = '';
 	let emailFocus;
 	let buttonText = 'Join Newsletter';
+
+	onMount(() => {
+		if (localStorage.getItem('result')) {
+			goto('/results/compatibility');
+		}
+	});
 
 	function handleKeydown(event) {
 		// Check if the Enter key was pressed
@@ -84,11 +92,11 @@
 	<nav>
 		<div class="top-row-logo" style="width: {inputExpanded ? '0' : '96px'};">
 			<img src={aircraft} width="20" height="19" alt="Aircraft Logo" />
-            <a href="/" class="logo">Aircraft</a>
+			<a href="/" class="logo">Aircraft</a>
 		</div>
-        <div class="top-row">
-            <a href="#contact">Contact Us</a>
-        </div>
+		<div class="top-row">
+			<a href="#contact">Contact Us</a>
+		</div>
 		<!-- <div
 			class="top-row"
 			style="width: {inputExpanded ? '100%' : 'unset'}; display: flex; justify-content: end;"
@@ -247,9 +255,9 @@
 		position: relative;
 	}
 
-    a:last-child {
-        margin-right: 0;
-    }
+	a:last-child {
+		margin-right: 0;
+	}
 
 	a:hover {
 		color: #777;
