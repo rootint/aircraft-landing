@@ -94,9 +94,9 @@
 			<img src={aircraft} width="20" height="19" alt="Aircraft Logo" />
 			<a href="/" class="logo">Aircraft</a>
 		</div>
-		<div class="top-row">
+		<!-- <div class="top-row">
 			<a href="#contact">Contact Us</a>
-		</div>
+		</div> -->
 		<!-- <div
 			class="top-row"
 			style="width: {inputExpanded ? '100%' : 'unset'}; display: flex; justify-content: end;"

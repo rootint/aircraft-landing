@@ -7,36 +7,74 @@
 	$: isEmailValid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email);
 
 	// TODO: send email to the database
-    // TODO: post until not a 500
+	// TODO: post until not a 500
 
 	async function handleSubmit() {
 		console.log(`Submitting ${email}`);
 		submitted = true;
-		const endpoint = 'https://api.llime.co/aircraft/send-receive-message';
+		const email_endpoint = 'https://api.llime.co/aircraft/email';
 
-		const response = await fetch(endpoint, {
+		const email_response = await fetch(email_endpoint, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				description: localStorage.getItem('description'),
-				experience: localStorage.getItem('experience'),
-				why: localStorage.getItem('why'),
-				idea: localStorage.getItem('idea'),
-				acute: localStorage.getItem('acute')
+				email: email
 			})
 		});
-		if (!response.ok) {
-			throw new Error(`Error: ${response.status}`);
+		if (!email_response.ok) {
+			throw new Error(`Error: ${email_response.status}`);
 		}
 
-		const data = await response.json();
-		console.log(data);
-		localStorage.setItem('result', data);
-        localStorage.setItem('email', email);
-		await goto('/results/compatibility/');
-		// return data['message'];
+		const endpoint = 'https://api.llime.co/aircraft/send-receive-message';
+		let attempt = 0; // Keep track of the number of attempts
+		let maxAttempts = 5; // Maximum number of attempts to avoid infinite loop
+		let successful = false; // Flag to keep track of whether the request was successful
+
+		while (!successful && attempt < maxAttempts) {
+			try {
+				const response = await fetch(endpoint, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						description: localStorage.getItem('description'),
+						experience: localStorage.getItem('experience'),
+						why: localStorage.getItem('why'),
+						idea: localStorage.getItem('idea'),
+						acute: localStorage.getItem('acute')
+					})
+				});
+
+				// Check if the response is successful (status 200)
+				if (response.ok) {
+					successful = true; // Set the flag to true to exit the loop
+					const data = await response.json();
+					console.log(data);
+					localStorage.setItem('result', data); // Make sure to stringify the data before storing
+					localStorage.setItem('email', email);
+					await goto('/results/compatibility/');
+					// return data['message'];
+				} else if (response.status === 500) {
+					// If the status code is 500, log the error and attempt the request again
+					console.error(`Attempt ${attempt + 1}: Server Error ${response.status}. Retrying...`);
+				} else {
+					// If the error is not a 500, throw to catch block
+					throw new Error(`Error: ${response.status}`);
+				}
+			} catch (error) {
+				console.error(`Request failed: ${error}`);
+				if (attempt >= maxAttempts - 1) {
+					console.error('Max attempts reached. Giving up.');
+					alert('Oops! We have a server error. Please, reload the page and try again.');
+					throw error; // Rethrow after max attempts to handle the error outside
+				}
+			} finally {
+				attempt++; // Increment attempt counter
+			}
+		}
 	}
 </script>
 

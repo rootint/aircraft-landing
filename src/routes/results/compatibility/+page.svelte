@@ -24,26 +24,25 @@
 <section class="centered" style="width: 580px;">
 	<h3>Done! 🎉</h3>
 	<h4>Here’s your suitability score:</h4>
-	<div class="ring">
-		<div class="speed">
-			<div class="value">{value}</div>
-			<div class="out-of">out of 100</div>
-		</div>
+	<div class="value">
+		{value}
+		<span class="out-of">out of 100</span>
 	</div>
+
 	<a href="/results/general" class="enabled">See Why</a>
 </section>
 
 <style>
-    .ring {
+	.ring {
 		position: relative;
 		/* --pointerleft: 11%;
 		--pointertop: 11%;
 		--pointerdeg: -45deg; */
 		width: 100%;
-        aspect-ratio: 1;
-        /* background-color: #eee; */
-        border: #ddd 1px solid;
-        background-image: #eee;
+		aspect-ratio: 1;
+		/* background-color: #eee; */
+		border: #ddd 1px solid;
+		background-image: #eee;
 		/* background-image: radial-gradient(red 0, red 50%, transparent 50%, transparent 100%),
 			radial-gradient(green 0, green 50%, transparent 50%, transparent 100%),
 			radial-gradient(white 0, white 60%, transparent 60%),
@@ -98,12 +97,16 @@
 	.value {
 		font-size: 64px;
 		font-weight: 600;
+		margin: 0;
+		padding: 0;
 		color: #111;
 	}
 	.out-of {
 		font-size: 20px;
 		font-weight: 400;
 		color: #999;
+		margin: 0;
+		padding: 0;
 	}
 	.enabled {
 		background-color: #fff;
@@ -115,6 +118,7 @@
 		text-align: center;
 	}
 	a {
+		margin-top: 16px;
 		color: #fff;
 		font-size: 16px;
 		font-weight: 600;
