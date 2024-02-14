@@ -57,7 +57,11 @@
 </script>
 
 <!-- Button to trigger the modal -->
-<div style="display: flex; flex-direction: column; align-items: center; animation: fadeIn 2s ease;">
+<div
+	style="flex-direction: column; align-items: center; animation: fadeIn 2s ease; {showModal
+		? 'display: none'
+		: 'display: flex'}"
+>
 	<h4 style="color: #111;">Want help in building your product?</h4>
 	<div class="button-column">
 		<div class="gradient-wrapper">
@@ -228,6 +232,18 @@
 			padding: 16px;
 			height: unset;
 		}
+		.modal {
+			position: relative;
+			background-color: #fff;
+			z-index: 3;
+		}
+		.modal-content {
+			background: none;
+			padding: 16px;
+			border-radius: 0px;
+			box-shadow: none;
+			width: 100%;
+		}
 	}
 
 	.email-input:focus {
@@ -272,6 +288,10 @@
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
+		}
+
+		h4 {
+			margin-bottom: 0px;
 		}
 	}
 

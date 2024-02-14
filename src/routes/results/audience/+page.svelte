@@ -40,6 +40,9 @@
 </div>
 
 <style>
+    section.centered {
+        margin-bottom: 0px;
+    }
 	.summary {
 		margin-bottom: 24px;
 		padding: 16px 16px;

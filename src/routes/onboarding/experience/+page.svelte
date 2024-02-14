@@ -83,7 +83,9 @@
 		{#if visible}
 			<div class="email-row">
 				<div class="email-container">
-					<Linkedin size="48" color="#AAAAAA" />
+					<div class="hide-mobile">
+						<Linkedin size="48" color="#AAAAAA" />
+					</div>
 					<span>https://linkedin.com/in/</span>
 					<input
 						bind:value={username}
@@ -117,7 +119,9 @@
 		{#if !visible}
 			<div class="summary">
 				<p style="font-size: 14px; line-height: 140%; color: #555;">
-					<span style="font-weight: 600; font-size: 14px; color: #111; margin: 0; padding: 0;">Summary:</span>
+					<span style="font-weight: 600; font-size: 14px; color: #111; margin: 0; padding: 0;"
+						>Summary:</span
+					>
 					{result['summary']}
 				</p>
 			</div>
@@ -159,6 +163,8 @@
 		display: flex;
 		width: 100%;
 		margin-bottom: 24px;
+	}
+	.hide-mobile {
 	}
 	span {
 		font-weight: 400;
@@ -246,8 +252,51 @@
 		.email-container {
 			width: 100%;
 			font-size: 1rem;
-			padding: 16px;
+			padding: 12px;
 			height: unset;
+		}
+	}
+	@media (max-width: 800px) {
+		.hide-mobile {
+			display: none;
+		}
+		.email-row {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			margin-bottom: 24px;
+		}
+		.email-container {
+			background-color: #fff;
+			color: #111;
+			border-radius: 8px;
+			border: none;
+			border: 1px solid #ddd;
+			opacity: 1;
+			display: flex;
+			align-items: center;
+			margin-bottom: 16px;
+		}
+		.linkedin-submit-btn {
+			color: #fff;
+			background-color: #111;
+			box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+			pointer-events: all;
+			cursor: pointer;
+			border: none;
+			display: block;
+			border-radius: 8px;
+			font-size: 16px;
+			font-weight: 500;
+			padding: 12px;
+		}
+		.linkedin-submit-btn.disabled {
+			box-shadow: none;
+			color: #fff;
+			background-color: #ddd;
+			pointer-events: none;
+			cursor: default;
+			padding: 12px 12px;
 		}
 	}
 </style>

@@ -1,5 +1,4 @@
 <script>
-	import { ChevronLeft } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 
 	let description = '';
@@ -118,18 +117,5 @@
 	}
 	.benefit-input::placeholder {
 		color: #aaa;
-	}
-	section.centered {
-		/* background-color: aqua; */
-		justify-content: center;
-		display: flex;
-		flex-direction: column;
-		animation: fadeIn 0.7s ease;
-		background-color: #fff;
-		padding: 32px;
-		border: 1px solid #ddd;
-		box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
-		border-radius: 8px;
-		max-width: 520px;
 	}
 </style>
