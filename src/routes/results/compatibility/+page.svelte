@@ -24,11 +24,87 @@
 <section class="centered" style="width: 580px;">
 	<h3>Done! 🎉</h3>
 	<h4>Here’s your suitability score:</h4>
-	{value} out of 100
+	<div class="ring">
+		<div class="speed">
+			<div class="value">{value}</div>
+			<div class="out-of">out of 100</div>
+		</div>
+	</div>
 	<a href="/results/general" class="enabled">See Why</a>
 </section>
 
 <style>
+    .ring {
+		position: relative;
+		/* --pointerleft: 11%;
+		--pointertop: 11%;
+		--pointerdeg: -45deg; */
+		width: 100%;
+        aspect-ratio: 1;
+        /* background-color: #eee; */
+        border: #ddd 1px solid;
+        background-image: #eee;
+		/* background-image: radial-gradient(red 0, red 50%, transparent 50%, transparent 100%),
+			radial-gradient(green 0, green 50%, transparent 50%, transparent 100%),
+			radial-gradient(white 0, white 60%, transparent 60%),
+			conic-gradient(orange 0, green 130deg, white 130deg, white 230deg, red 230deg, orange 360deg); */
+		/* background-size: 11% 11%, 11% 11%, 100% 100%, 100% 100%; */
+		background-repeat: no-repeat;
+		/* background-position: 9.2% 82.3%, 90.8% 82.3%, center center, center center; */
+		border-radius: 50%;
+		border-style: none;
+	}
+	/* .ring {
+		position: relative;
+		--pointerleft: 11%;
+		--pointertop: 11%;
+		--pointerdeg: -45deg;
+		width: 50vmin;
+		height: 50vmin;
+		background-image: radial-gradient(red 0, red 50%, transparent 50%, transparent 100%),
+			radial-gradient(green 0, green 50%, transparent 50%, transparent 100%),
+			radial-gradient(white 0, white 60%, transparent 60%),
+			conic-gradient(orange 0, green 130deg, white 130deg, white 230deg, red 230deg, orange 360deg);
+		background-size: 11% 11%, 11% 11%, 100% 100%, 100% 100%;
+		background-repeat: no-repeat;
+		background-position: 9.2% 82.3%, 90.8% 82.3%, center center, center center;
+		border-radius: 50%;
+		border-style: none;
+	} */
+
+	/* .ring::after {
+		position: absolute;
+		content: '';
+		width: 5%;
+		height: 15%;
+		left: var(--pointerleft);
+		top: var(--pointertop);
+		transform: rotate(var(--pointerdeg));
+		border-style: solid;
+		border-width: 0.5vmin;
+		border-radius: 2vmin;
+		background-color: white;
+	} */
+
+	.speed {
+		display: inline-block;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translateX(-50%) translateY(-50%);
+		text-align: center;
+	}
+
+	.value {
+		font-size: 64px;
+		font-weight: 600;
+		color: #111;
+	}
+	.out-of {
+		font-size: 20px;
+		font-weight: 400;
+		color: #999;
+	}
 	.enabled {
 		background-color: #fff;
 		color: #111;

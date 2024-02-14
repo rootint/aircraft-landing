@@ -7,21 +7,51 @@
 		}
 	});
 
-	let showModal = true;
+	let design = false;
+	let branding = false;
+
+	let showModal = false;
 	let formData = {
+		name: '',
 		email: '',
 		field2: '',
-		budget: '',
+		budget: ''
 	};
 
 	function close() {
 		showModal = false;
 	}
 
-	function submit() {
-		console.log(formData);
-		// handle the form submission here
-		// then close the modal
+	async function submit() {
+		console.log(
+			JSON.stringify({
+				email: formData.email,
+				name: formData.name,
+				service: `Design&Dev: ${design}, Branding: ${branding}`,
+				budget: formData.budget,
+				problems: '',
+				success: ''
+			})
+		);
+		const endpoint = 'https://api.llime.co/aircraft/contact';
+
+		const response = await fetch(endpoint, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				email: formData.email,
+				name: formData.name,
+				service: `Design&Dev: ${design}, Branding: ${branding}`,
+				budget: formData.budget,
+				problems: '',
+				success: ''
+			})
+		});
+		if (!response.ok) {
+			throw new Error(`Error: ${response.status}`);
+		}
 		close();
 	}
 </script>
@@ -55,33 +85,93 @@
 					/>
 				</div>
 				<div class="input-part">
-					<label for="field2">What service are you interested in?</label>
-					<input type="text" id="field2" bind:value={formData.field2} />
+					<label for="email">Your Name</label>
+					<input type="text" bind:value={formData.name} class="email-input" placeholder="Name" />
 				</div>
+				<p class="checkbox-title">What service are you interested in?</p>
+				<div
+					class="checkbox-wrapper"
+					on:click={() => {
+						design = !design;
+					}}
+				>
+					<input type="checkbox" bind:checked={design} />
+					<div class="checkbox-text">
+						<p class="checkbox-label">Design and Development</p>
+						<p class="checkbox-subtitle">
+							App design, Web design, Pitch decks, Graphic design, Web app development
+						</p>
+					</div>
+				</div>
+
+				<div
+					class="checkbox-wrapper"
+					on:click={() => {
+						branding = !branding;
+					}}
+				>
+					<input type="checkbox" bind:checked={branding} />
+					<div class="checkbox-text">
+						<p class="checkbox-label">Branding</p>
+						<p class="checkbox-subtitle">
+							Logo, Business cards, Letterheads, Brand guidelines, Brand Strategy
+						</p>
+					</div>
+				</div>
+
+				<div style="height: 8px" />
 				<div class="input-part">
 					<label for="budget">What is your budget for this project?</label>
-                    <input
+					<input
 						type="text"
 						bind:value={formData.budget}
 						class="email-input"
 						placeholder="3000 USD"
 					/>
 				</div>
-				<!-- <div class="input-part">
-					<label for="field4">What problems are you hoping to solve by working with us?</label>
-					<input type="text" id="field4" bind:value={formData.field4} />
-				</div>
-				<div class="input-part">
-					<label for="field4">What does success look like for this project?</label>
-					<input type="text" id="field4" bind:value={formData.field4} />
-				</div> -->
-				<button type="submit">Book a Call</button>
+				<button
+					type="submit"
+					class={(branding || design) && formData.name && formData.email && formData.budget
+						? ''
+						: 'disabled'}>Book a Call</button
+				>
 			</form>
 		</div>
 	</div>
 {/if}
 
 <style>
+	p.checkbox-subtitle {
+		line-height: 130%;
+		color: #999;
+		font-size: 14px;
+		margin: 0;
+		padding: 0;
+		padding-top: 4px;
+	}
+
+	p.checkbox-title {
+		margin-bottom: 8px;
+		font-size: 16px;
+		font-weight: 500;
+	}
+	input[type='checkbox'] {
+		margin-right: 12px;
+		accent-color: #111;
+	}
+	.checkbox-label {
+		margin: 0;
+		padding: 0;
+		font-weight: 500;
+	}
+	.checkbox-wrapper {
+		align-items: start;
+		display: flex;
+		padding: 16px;
+		border: 1px solid #ddd;
+		border-radius: 8px;
+		margin-bottom: 16px;
+	}
 	label {
 		margin-bottom: 8px;
 		font-size: 16px;
@@ -109,6 +199,7 @@
 		padding: 32px;
 		border-radius: 8px;
 		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+		width: 580px;
 	}
 
 	.modal-close {
@@ -256,6 +347,12 @@
 		border-radius: 8px;
 		/* margin-left: 10px; */
 		cursor: pointer;
+	}
+
+	button.disabled {
+		background-color: #ddd;
+		cursor: default;
+		pointer-events: none;
 	}
 
 	@media (max-width: 800px) {
