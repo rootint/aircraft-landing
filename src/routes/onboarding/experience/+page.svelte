@@ -79,61 +79,12 @@
 		Seamlessly personalize your experience by importing your work and education history from
 		LinkedIn, or share it with us manually.
 	</h4>
-	{#if !noLinkedin}
-		{#if visible}
-			<div class="email-row">
-				<div class="email-container">
-					<div class="hide-mobile">
-						<Linkedin size="48" color="#AAAAAA" />
-					</div>
-					<span>https://linkedin.com/in/</span>
-					<input
-						bind:value={username}
-						on:input={checkButton}
-						class="email-input"
-						placeholder="username"
-					/>
-				</div>
-
-				<div style="width: 16px" />
-				<button
-					on:click={getLinkedIn}
-					class={isLinkedInEnabled ? 'linkedin-submit-btn' : 'linkedin-submit-btn disabled'}
-				>
-					{#if isLoading}
-						<div class="lds-ring">
-							<div />
-							<div />
-							<div />
-							<div />
-						</div>
-					{:else}
-						<ChevronRight />
-					{/if}
-				</button>
-			</div>
-		{/if}
-		{#if isError}
-			<p style="color: red; margin: 0; margin-bottom: 16px;">Your username is incorrect.</p>
-		{/if}
-		{#if !visible}
-			<div class="summary">
-				<p style="font-size: 14px; line-height: 140%; color: #555;">
-					<span style="font-weight: 600; font-size: 14px; color: #111; margin: 0; padding: 0;"
-						>Summary:</span
-					>
-					{result['summary']}
-				</p>
-			</div>
-		{/if}
-	{:else}
-		<textarea
-			bind:value={experience}
-			on:input={checkButton}
-			class="default-input"
-			placeholder="An AI-powered learning assistant leveraging an LLM that offers personalized academic support to students, including homework solutions, study planning, and language learning, adapting to individual needs and learning styles."
-		/>
-	{/if}
+	<textarea
+		bind:value={experience}
+		on:input={checkButton}
+		class="default-input"
+		placeholder="I'm an AI developer specializing in NLP, passionate about using my skills to create educational tools that adapt to individual learning styles and simplify complex academic concepts."
+	/>
 	<div class="button-row">
 		<a href="/onboarding/description" class="back-button"><ChevronLeft color="#111111" /></a>
 
@@ -141,9 +92,7 @@
 			{#if isButtonEnabled}
 				<a href="/onboarding/why" on:click={handleSubmit} class="continue">Continue</a>
 			{:else}
-				<button on:click={changeMode} class="linkedin-switch-btn"
-					>I {!noLinkedin ? "don't" : ''} have a LinkedIn account</button
-				>
+				<button on:click={changeMode} disabled="true" class="linkedin-switch-btn">Continue</button>
 			{/if}
 		{:else}
 			<a href="/onboarding/why" on:click={handleSubmit} class="continue">Continue</a>
@@ -222,11 +171,10 @@
 	}
 
 	.linkedin-switch-btn {
-		color: #111;
-		background-color: #fff;
-		box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
-		pointer-events: all;
-		cursor: pointer;
+		color: #fff;
+		background-color: #ddd;
+		pointer-events: none;
+		/* cursor: pointer; */
 		border: 1px solid #ddd;
 		display: block;
 		border-radius: 8px;

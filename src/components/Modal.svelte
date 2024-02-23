@@ -72,6 +72,16 @@
 	</div>
 </div>
 
+<!-- <div class="input-part">
+	<label for="email">Email</label>
+	<input
+		type="email"
+		bind:value={formData.email}
+		class="email-input"
+		placeholder="example@email.com"
+	/>
+</div> -->
+
 {#if showModal}
 	<div class="modal">
 		<div class="modal-content">

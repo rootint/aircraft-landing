@@ -74,17 +74,6 @@
 	function expandInput() {
 		inputExpanded = !inputExpanded;
 		buttonText = 'Join Newsletter';
-		// if (inputExpanded) {
-		// 	// emailFocus.blur();
-		// 	// emailFocus.focus();
-		// } else {
-		// 	setTimeout(() => emailFocus.focus(), 0);
-		// 	// emailFocus.focus();
-		// }
-		// if (inputExpanded) {
-		//     buttonText = 'Subscribe!';
-		// } else {
-		// }
 	}
 </script>
 
@@ -94,52 +83,100 @@
 			<img src={aircraft} width="20" height="19" alt="Aircraft Logo" />
 			<a href="/" class="logo">Aircraft</a>
 		</div>
-		<!-- <div class="top-row">
-			<a href="#contact">Contact Us</a>
-		</div> -->
-		<!-- <div
-			class="top-row"
-			style="width: {inputExpanded ? '100%' : 'unset'}; display: flex; justify-content: end;"
-		>
-			<div class="hide-on-mobile">
-				<a href="#demo">View Demo</a>
-				<a class="pricing" href="#pricing"
-					>Pricing
-					<div class="hide-on-small-screens">
-						<svg
-							class="arrow"
-							xmlns="http://www.w3.org/2000/svg"
-							width="9"
-							height="111"
-							fill="#B5B5B5"
-							><path
-								d="M4.854.646a.5.5 0 0 0-.708 0L.964 3.828a.5.5 0 1 0 .708.708L4.5 1.707l2.828 2.829a.5.5 0 1 0 .708-.708L4.854.646ZM5 111V1H4v110h1Z"
-							/></svg
-						>
-						<div class="text">Check our cheap plans to customize your experience.</div>
-					</div>
+		<div class="top-row">
+			<div class="gradient-wrapper">
+				<a href="https://aircraft-agency-landing.vercel.app/">
+					<button class="gradient-button">Visit Aircraft</button>
 				</a>
 			</div>
-			<input
-				id="emailInput"
-				type="email"
-				bind:this={emailFocus}
-				bind:value={email}
-				on:input={validateEmail}
-				on:keydown={handleKeydown}
-				placeholder="Enter your email"
-				class={inputExpanded ? 'expanded' : 'hidden'}
-			/>
-			<button
-				class="header-button"
-				on:click={inputExpanded ? (isEmailValid ? handleSubmit : expandInput) : expandInput}
-				>{buttonText}</button
-			>
-		</div> -->
+		</div>
 	</nav>
 </header>
 
 <style>
+	.gradient-button {
+		border-radius: 7px;
+		background-color: #fff;
+		border: none;
+		padding: 12px 28px;
+		font-weight: 500;
+		font-size: 16px;
+		box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+        cursor: pointer;
+        text-decoration: none;
+	}
+	.gradient-wrapper {
+		padding: 1px;
+		background: linear-gradient(
+			to bottom right,
+			#91de45,
+			#45dea7,
+			#454ade,
+			#8347de,
+			#de4545,
+			#91de45,
+			#45dea7,
+			#454ade,
+			#8347de,
+			#de4545
+		);
+		background-size: 200% 200%;
+		border-radius: 8px;
+	}
+
+	.gradient-wrapper:hover {
+		background: linear-gradient(
+			to bottom right,
+			#91de45,
+			#45dea7,
+			#454ade,
+			#8347de,
+			#de4545,
+			#91de45,
+			#45dea7,
+			#454ade,
+			#8347de,
+			#de4545
+		);
+		background-size: 200% 200%;
+		-webkit-animation: Animation 4s linear infinite;
+		-moz-animation: Animation 4s linear infinite;
+		animation: Animation 4s linear infinite;
+	}
+
+	@-webkit-keyframes Animation {
+		0% {
+			background-position: 10% 0%;
+		}
+		50% {
+			background-position: 91% 100%;
+		}
+		100% {
+			background-position: 10% 0%;
+		}
+	}
+	@-moz-keyframes Animation {
+		0% {
+			background-position: 10% 0%;
+		}
+		50% {
+			background-position: 91% 100%;
+		}
+		100% {
+			background-position: 10% 0%;
+		}
+	}
+	@keyframes Animation {
+		0% {
+			background-position: 10% 0%;
+		}
+		50% {
+			background-position: 91% 100%;
+		}
+		100% {
+			background-position: 10% 0%;
+		}
+	}
 	.hidden {
 		visibility: hidden;
 		margin-right: -32px;
