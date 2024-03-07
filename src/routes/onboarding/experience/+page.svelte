@@ -75,10 +75,7 @@
 
 <section class="centered">
 	<h3>Step 2. Experience</h3>
-	<h4>
-		Seamlessly personalize your experience by importing your work and education history from
-		LinkedIn, or share it with us manually.
-	</h4>
+	<h4>Share your experience with us in the field below.</h4>
 	<textarea
 		bind:value={experience}
 		on:input={checkButton}

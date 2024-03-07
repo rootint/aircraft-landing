@@ -53,9 +53,10 @@
 				// Check if the response is successful (status 200)
 				if (response.ok) {
 					successful = true; // Set the flag to true to exit the loop
-					const data = await response.json();
+					// const data = await response.json();
+                    const data = await response.json();
 					console.log(data);
-					localStorage.setItem('result', data); // Make sure to stringify the data before storing
+					localStorage.setItem('result', JSON.stringify(data)); // Make sure to stringify the data before storing
 					localStorage.setItem('email', email);
 					await goto('/results/compatibility/');
 					// return data['message'];
