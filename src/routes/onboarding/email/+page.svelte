@@ -28,7 +28,7 @@
 		}
 
 		const endpoint = 'https://api.llime.co/aircraft/send-receive-message';
-        // const endpoint = 'http://localhost:1337/send-receive-message';
+		// const endpoint = 'http://localhost:1337/send-receive-message';
 		let attempt = 0; // Keep track of the number of attempts
 		let maxAttempts = 7; // Maximum number of attempts to avoid infinite loop
 		let successful = false; // Flag to keep track of whether the request was successful
@@ -45,7 +45,8 @@
 						experience: localStorage.getItem('experience'),
 						why: localStorage.getItem('why'),
 						idea: localStorage.getItem('idea'),
-						acute: localStorage.getItem('acute')
+						acute: localStorage.getItem('acute'),
+						email: email
 					})
 				});
 
