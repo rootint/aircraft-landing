@@ -1,0 +1,8 @@
+{
+    "rewrites": [
+      {
+        "source": "/validate/(.*)",
+        "destination": "/validate/index.html"
+      }
+    ]
+  }
